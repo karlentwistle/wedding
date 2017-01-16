@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+$visual-grid: false;
+
+@import "normalize-rails";
+@import "grid-settings";
+@import "neat";
+@import "bourbon";
+@import "base/base";
+@import "refills/flashes";
+
+
+.container {
+  @include outer-container;
+}
