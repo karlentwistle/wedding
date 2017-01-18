@@ -3,7 +3,10 @@ $medium-screen: 600px;
 $large-screen: 900px;
 
 // Typography
-$base-font-family: $font-stack-system;
+// $base-font-family: $font-stack-system;
+
+$base-font-family: 'Great Vibes', serif;
+
 $heading-font-family: $base-font-family;
 
 // Font Sizes
@@ -24,6 +27,8 @@ $blue: #1565c0;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
+$gray: #545358;
+$pink: #aaa;
 
 // Font Colors
 $base-font-color: $dark-gray;

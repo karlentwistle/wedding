@@ -1,0 +1,49 @@
+
+header {
+  background-color: $pink;
+  position: relative;
+
+  h1 {
+    font-size: 8em;
+    margin: 0;
+    padding: 0.10em 0;
+    text-shadow: 3px 3px 0 $gray;
+
+    @include media($desktop) {
+      font-size: 5em;
+    }
+
+    @include media($tablet) {
+      font-size: 4em;
+    }
+
+    @include media($mobile) {
+      font-size: 3em;
+    }
+
+  }
+
+  .head-left {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+
+    @include media($desktop) { display:none }
+  }
+
+  .head-right {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 3;
+
+    -moz-transform: scaleX(-1);    /* Gecko */
+    -o-transform: scaleX(-1);      /* Opera */
+    -webkit-transform: scaleX(-1); /* Webkit */
+    transform: scaleX(-1);         /* Standard */
+    filter: FlipH;                 /* IE 6/7/8 */
+
+    @include media($desktop) { display:none }
+  }
+}

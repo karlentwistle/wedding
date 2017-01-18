@@ -8,8 +8,43 @@ $visual-grid: false;
 @import "bourbon";
 @import "base/base";
 @import "refills/flashes";
+@import "footer";
+@import "header";
+@import "refills/centered-navigation";
 
 
-.container {
+
+
+body {
   @include outer-container;
+  background-color: $gray;
+}
+
+.hero-image {
+  width:100%
+}
+
+main {
+  @include span-columns(8);
+  @include shift(1);
+  background-color: #fff;
+}
+
+.hero {
+  position: relative;
+
+  h2 {
+   position: absolute;
+   top: 10px;
+   left: 0;
+   width: 100%;
+  }
+
+  h3 {
+   position: absolute;
+   top: 30px;
+   left: 0;
+   width: 100%;
+  }
+
 }
