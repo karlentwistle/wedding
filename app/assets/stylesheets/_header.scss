@@ -1,26 +1,25 @@
 
 header {
-  background-color: $pink;
+  background-color: $gray;
   position: relative;
 
   h1 {
-    font-size: 8em;
+    font-size: 2.8em;
     margin: 0;
-    padding: 0.10em 0;
-    text-shadow: 3px 3px 0 $gray;
+    padding: 0;
+    vertical-align: middle;
+    line-height: 2em;
+    z-index: 4;
+    color: #e7b5ba;
 
-    @include media($desktop) {
-      font-size: 5em;
-    }
+    background: -webkit-linear-gradient(#e3a8ae, #785758);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
     @include media($tablet) {
-      font-size: 4em;
+      font-size: 2em;
+      line-height: 2em;
     }
-
-    @include media($mobile) {
-      font-size: 3em;
-    }
-
   }
 
   .head-left {
@@ -29,7 +28,7 @@ header {
     left: 0px;
     z-index: 3;
 
-    @include media($desktop) { display:none }
+    @include media($tablet) { display:none }
   }
 
   .head-right {
@@ -44,6 +43,6 @@ header {
     transform: scaleX(-1);         /* Standard */
     filter: FlipH;                 /* IE 6/7/8 */
 
-    @include media($desktop) { display:none }
+    @include media($tablet) { display:none }
   }
 }

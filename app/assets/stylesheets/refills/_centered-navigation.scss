@@ -13,14 +13,13 @@
   $centered-navigation-submenu-padding: 1em;
   $centered-navigation-submenu-width: 12em;
   $centered-navigation-item-nudge: 2.2em;
-  $horizontal-bar-mode: $large-screen;
+  $horizontal-bar-mode: $medium-screen;
 
   background-color: $centered-navigation-background;
   border-bottom: 1px solid darken($centered-navigation-background, 6%);
   min-height: $centered-navigation-height;
   width: 100%;
   z-index: 2;
-  font-family: Roboto;
 
   // Mobile view
 
@@ -174,98 +173,4 @@
     }
   }
 
-  li.more {
-    overflow: visible;
-    padding-right: 0;
-
-    a {
-      padding-right: $centered-navigation-submenu-padding;
-    }
-
-    > a {
-      padding-right: 1.6em;
-      position: relative;
-
-      @include media($large-screen) {
-        margin-right: $centered-navigation-submenu-padding;
-      }
-
-      &::after {
-        content: "›";
-        font-size: 1.2em;
-        position: absolute;
-        right: $centered-navigation-submenu-padding / 2;
-      }
-    }
-
-    &:focus > .submenu,
-    &:hover > .submenu {
-      display: block;
-    }
-
-    @include media($horizontal-bar-mode) {
-      padding-right: $centered-navigation-submenu-padding;
-      position: relative;
-    }
-  }
-
-  ul.submenu {
-    display: none;
-    padding-left: 0;
-
-    @include media($horizontal-bar-mode) {
-      left: -$centered-navigation-submenu-padding;
-      position: absolute;
-      top: 1.5em;
-    }
-
-    .submenu.fly-out-right {
-      @include media($horizontal-bar-mode) {
-        left: $centered-navigation-submenu-width - 0.2em;
-        top: 0;
-      }
-    }
-
-    .submenu.fly-out-left {
-      @include media($horizontal-bar-mode) {
-        left: -$centered-navigation-submenu-width + 0.2em;
-        top: 0;
-      }
-    }
-
-    li {
-      display: block;
-      padding-right: 0;
-
-      @include media($horizontal-bar-mode) {
-        line-height: $centered-navigation-height / 1.3;
-
-        &:first-child > a {
-          border-top-left-radius: $base-border-radius;
-          border-top-right-radius: $base-border-radius;
-        }
-
-        &:last-child > a {
-          border-bottom-left-radius: $base-border-radius;
-          border-bottom-right-radius: $base-border-radius;
-          padding-bottom: 0.7em;
-        }
-      }
-
-      a {
-        background-color: darken($centered-navigation-background, 3%);
-        display: inline-block;
-        text-align: right;
-        text-decoration: none;
-        width: 100%;
-
-        @include media($horizontal-bar-mode) {
-          background-color: $centered-navigation-background;
-          padding-left: $centered-navigation-submenu-padding;
-          text-align: left;
-          width: $centered-navigation-submenu-width;
-        }
-      }
-    }
-  }
 }

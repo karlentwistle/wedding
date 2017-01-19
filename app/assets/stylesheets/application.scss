@@ -2,6 +2,7 @@
 
 $visual-grid: false;
 
+@import "base/variables";
 @import "normalize-rails";
 @import "grid-settings";
 @import "neat";
@@ -25,26 +26,11 @@ body {
 }
 
 main {
+  position: relative;
+  margin-top: -2em;
   @include span-columns(8);
   @include shift(1);
-  background-color: #fff;
-}
-
-.hero {
-  position: relative;
-
-  h2 {
-   position: absolute;
-   top: 10px;
-   left: 0;
-   width: 100%;
-  }
-
-  h3 {
-   position: absolute;
-   top: 30px;
-   left: 0;
-   width: 100%;
-  }
-
+  background: rgba(255,255,255,0.80);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
+  padding: 10px;
 }
