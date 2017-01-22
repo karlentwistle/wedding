@@ -27,6 +27,8 @@ header {
     top: 0px;
     left: 0px;
     z-index: 3;
+    width: 183px;
+    height: 248px;
 
     @include media($tablet) { display:none }
   }
@@ -36,7 +38,8 @@ header {
     top: 0px;
     right: 0px;
     z-index: 3;
-
+    width: 183px;
+    height: 248px;
     -moz-transform: scaleX(-1);    /* Gecko */
     -o-transform: scaleX(-1);      /* Opera */
     -webkit-transform: scaleX(-1); /* Webkit */
