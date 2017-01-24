@@ -1,0 +1,24 @@
+#venue_map {
+  height: 400px;
+  width: 100%;
+}
+
+#venue_map img {
+  max-width: none; // to prevent UI control bug
+}
+
+#venue_map .content {
+  padding: 0 0.5em 1em 0.5em;
+}
+
+#venue_map .firstHeading {
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1em;
+  margin: 0;
+}
+
+#venue_map #bodyContent p {
+  font-size: 1em;
+  margin: 0;
+}

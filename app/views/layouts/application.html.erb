@@ -23,7 +23,8 @@
 
     <%= render 'refills/footer' %>
 
+    <%= yield :body_bottom  %>
+    <%= javascript_include_tag 'application' %>
   </body>
 
-  <%= javascript_include_tag 'application' %>
 </html>

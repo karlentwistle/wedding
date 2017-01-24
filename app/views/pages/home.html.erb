@@ -1,3 +1,7 @@
+<% content_for :body_bottom do %>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWd4gTNZlbNPJA2qhIPONJEs_K5FUdPwc"></script>
+<% end %>
+
 <header>
 
   <div class='head-left'>
@@ -19,16 +23,17 @@
 <%= image_tag('kings_weston_house_large.jpg', class: 'hero-image') %>
 
 <main>
+  <div id="venue_map"></div>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultricies magna eget elit malesuada varius. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus consequat ipsum nec ex tincidunt interdum. Nam elementum erat at quam suscipit, non efficitur purus commodo. Nulla non lacinia sapien, auctor consectetur diam. Pellentesque ornare sapien ut orci dapibus suscipit. Nunc euismod urna sit amet massa pellentesque vulputate.
-</p>
-<p>Maecenas id pharetra est. Donec laoreet fermentum libero sit amet egestas. Phasellus rutrum lacinia nisl eget commodo. Maecenas ut interdum libero. Sed nec volutpat mauris, ut blandit erat. In hac habitasse platea dictumst. Etiam posuere orci a neque suscipit, in aliquet orci ornare.
-</p>
-<p>Morbi laoreet lectus quis sollicitudin lacinia. Curabitur vel sapien velit. Sed nec mattis nunc, a hendrerit orci. Vestibulum venenatis mi ut condimentum tristique. Nam volutpat erat eu ipsum hendrerit convallis. Sed a fringilla mi, nec euismod odio. Sed aliquam, mauris in posuere efficitur, quam mauris sodales dolor, id blandit ex turpis sit amet eros. Sed congue ultricies tortor eu fermentum. Integer at rutrum nisi, a placerat odio. Aenean suscipit consectetur arcu non volutpat. Etiam nec nibh ac diam egestas congue. Sed sit amet ultricies mi. In tincidunt volutpat orci eget ultricies.
-</p>
-<p>Fusce sit amet nulla urna. Proin euismod sapien eget vehicula commodo. Suspendisse sit amet sapien id nibh bibendum feugiat. Sed convallis dolor egestas, bibendum augue ut, convallis risus. Sed ut pretium est, nec vehicula diam. Donec at orci posuere, scelerisque neque non, fringilla ligula. Phasellus augue lectus, dignissim id nisl non, lobortis vulputate nunc. Nullam luctus rutrum orci at maximus.
-</p>
-<p>Aliquam malesuada erat a odio pretium vehicula. Integer sit amet ullamcorper lacus, eget sodales odio. Praesent id nunc ac diam sodales interdum. Aliquam ullamcorper magna a nisl porta auctor. Etiam sed dui at ligula interdum accumsan. Duis urna massa, congue pretium libero ut, pretium semper odio. Aliquam non ante vitae dui volutpat dictum. Fusce ac posuere odio, a imperdiet justo. Donec sollicitudin ultricies elementum. Sed egestas consectetur massa, sit amet fermentum ipsum viverra sed. Nulla ornare felis dui, sit amet sollicitudin mauris fermentum eu. Nullam ornare dui leo, non ornare purus congue non. Mauris in ex viverra, scelerisque metus id, blandit est. Maecenas in nunc quis nunc lacinia convallis ac eget est. Nullam blandit nec odio vel dapibus.
-</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultricies magna eget elit malesuada varius. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus consequat ipsum nec ex tincidunt interdum. Nam elementum erat at quam suscipit, non efficitur purus commodo. Nulla non lacinia sapien, auctor consectetur diam. Pellentesque ornare sapien ut orci dapibus suscipit. Nunc euismod urna sit amet massa pellentesque vulputate.
+  </p>
+  <p>Maecenas id pharetra est. Donec laoreet fermentum libero sit amet egestas. Phasellus rutrum lacinia nisl eget commodo. Maecenas ut interdum libero. Sed nec volutpat mauris, ut blandit erat. In hac habitasse platea dictumst. Etiam posuere orci a neque suscipit, in aliquet orci ornare.
+  </p>
+  <p>Morbi laoreet lectus quis sollicitudin lacinia. Curabitur vel sapien velit. Sed nec mattis nunc, a hendrerit orci. Vestibulum venenatis mi ut condimentum tristique. Nam volutpat erat eu ipsum hendrerit convallis. Sed a fringilla mi, nec euismod odio. Sed aliquam, mauris in posuere efficitur, quam mauris sodales dolor, id blandit ex turpis sit amet eros. Sed congue ultricies tortor eu fermentum. Integer at rutrum nisi, a placerat odio. Aenean suscipit consectetur arcu non volutpat. Etiam nec nibh ac diam egestas congue. Sed sit amet ultricies mi. In tincidunt volutpat orci eget ultricies.
+  </p>
+  <p>Fusce sit amet nulla urna. Proin euismod sapien eget vehicula commodo. Suspendisse sit amet sapien id nibh bibendum feugiat. Sed convallis dolor egestas, bibendum augue ut, convallis risus. Sed ut pretium est, nec vehicula diam. Donec at orci posuere, scelerisque neque non, fringilla ligula. Phasellus augue lectus, dignissim id nisl non, lobortis vulputate nunc. Nullam luctus rutrum orci at maximus.
+  </p>
+  <p>Aliquam malesuada erat a odio pretium vehicula. Integer sit amet ullamcorper lacus, eget sodales odio. Praesent id nunc ac diam sodales interdum. Aliquam ullamcorper magna a nisl porta auctor. Etiam sed dui at ligula interdum accumsan. Duis urna massa, congue pretium libero ut, pretium semper odio. Aliquam non ante vitae dui volutpat dictum. Fusce ac posuere odio, a imperdiet justo. Donec sollicitudin ultricies elementum. Sed egestas consectetur massa, sit amet fermentum ipsum viverra sed. Nulla ornare felis dui, sit amet sollicitudin mauris fermentum eu. Nullam ornare dui leo, non ornare purus congue non. Mauris in ex viverra, scelerisque metus id, blandit est. Maecenas in nunc quis nunc lacinia convallis ac eget est. Nullam blandit nec odio vel dapibus.
+  </p>
 
 </main>
