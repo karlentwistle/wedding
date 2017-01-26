@@ -26,6 +26,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
 end
 
+group :test do
+  gem 'capybara', '~> 2.12'
+end
+
 group :development do
   gem 'listen', '~> 3.0.5'
   gem 'web-console', '>= 3.3.0'
