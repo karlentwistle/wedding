@@ -8,27 +8,10 @@ $visual-grid: false;
 @import "neat";
 @import "bourbon";
 @import "base/base";
+@import "global";
 @import "refills/flashes";
 @import "footer";
 @import "header";
 @import "refills/centered-navigation";
 @import "maps";
-
-body {
-  @include outer-container;
-  background-color: $gray;
-}
-
-.hero-image {
-  width:100%
-}
-
-main {
-  position: relative;
-  margin-top: -2em;
-  @include span-columns(8);
-  @include shift(1);
-  background: rgba(255,255,255,0.80);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.3), 0 0 40px rgba(0,0,0,0.1) inset;
-  padding: 10px;
-}
+@import "homepage";

@@ -8,20 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Great+Vibes">
-
-    <link rel="stylesheet" type="text/css"
-          href="https://fonts.googleapis.com/css?family=Calligraffitti">
-
-    <link rel="stylesheet" type="text/css"
           href="https://fonts.googleapis.com/css?family=Roboto">
-
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/navigation' %>
+
     <%= yield %>
 
-    <%= render 'refills/footer' %>
+    <%= render 'layouts/footer' %>
 
     <%= yield :body_bottom  %>
     <%= javascript_include_tag 'application' %>

@@ -2,13 +2,9 @@ source 'https://rubygems.org'
 
 ruby '2.4.0'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
 gem 'bourbon'
 gem 'coffee-rails', '~> 4.2'
+gem 'formtastic', '~> 3.1', '>= 3.1.4'
 gem 'high_voltage', '~> 3.0.0'
 gem 'jquery-rails'
 gem 'neat'
@@ -28,6 +24,9 @@ end
 
 group :test do
   gem 'capybara', '~> 2.12'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
+  gem 'factory_girl_rails', '~> 4.8'
+  gem 'faker', '~> 1.7', '>= 1.7.2'
 end
 
 group :development do
