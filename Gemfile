@@ -19,6 +19,7 @@ gem 'rails', '~> 5.0.1'
 gem 'refills'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'wicked'
 
 group :development, :test do
   gem 'byebug', platform: :mri
