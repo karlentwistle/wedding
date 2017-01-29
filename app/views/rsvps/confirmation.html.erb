@@ -1,0 +1,7 @@
+<main>
+  <ul>
+    <% @object.people.each do |person| %>
+      <li><%= person %> - <%= person.attending %></li>
+    <% end %>
+  </ul>
+</main>

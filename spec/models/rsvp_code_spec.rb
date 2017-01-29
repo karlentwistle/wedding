@@ -19,4 +19,26 @@ RSpec.describe RsvpCode, type: :model do
       expect(duplicate_rsvp_code.save).to be false
     end
   end
+
+  describe '#people' do
+    context 'no people associated' do
+      it 'is empty' do
+        expect(subject.people).to be_empty
+      end
+    end
+
+    context 'has people associated' do
+      let(:associated_a) { create(:person) }
+      let(:associated_b) { create(:person) }
+      let(:not_associated) { create(:person) }
+
+      before do
+        subject.people << [associated_a, associated_b]
+      end
+
+      it 'returns associated people' do
+        expect(subject.people).to match_array([associated_a, associated_b])
+      end
+    end
+  end
 end

@@ -1,6 +1,6 @@
 <main>
-  <%= semantic_form_for @object, url: wizard_path, method: :put do |f| %>
+  <%= simple_form_for @object, url: wizard_path, method: :put do |f| %>
     <%= f.input :secret %>
-    <%= f.action :submit, label: 'Next' %>
+    <%= f.button :submit, 'Next' %>
   <% end %>
 </main>

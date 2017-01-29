@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+rsvp_code = RsvpCode.create!(secret: '1234')
+
+person_a = Person.create(full_name: 'Karl Entwistle')
+person_b = Person.create(full_name: 'Hannah Sergeant')
+
+rsvp_code.people << [person_a, person_b]

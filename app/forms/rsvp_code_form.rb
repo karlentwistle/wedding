@@ -1,15 +1,6 @@
-class RsvpCodeForm
-  include ActiveModel::Model
-
-  def persisted?
-    false
-  end
-
-  def initialize(params={})
-    params.each do |key, value|
-      send("#{key}=", value)
-    end
-  end
+class RsvpCodeForm < RsvpBaseForm
+  include ActiveModel::Validations
+  include ActiveModel::Conversion
 
   validates :secret, presence: true
   validate :rsvp_code_exists
@@ -20,11 +11,15 @@ class RsvpCodeForm
 
   attr_reader :secret
 
+  def cookie_payload
+    { rsvp_code_secret: secret }
+  end
+
   private
 
   def rsvp_code_exists
     if secret.present? && RsvpCode.exists?(secret: secret)
-      true
+      return true
     elsif secret.present?
       errors.add('secret', 'unfortunately your code wasn\'t found')
       false
@@ -35,5 +30,3 @@ class RsvpCodeForm
 
   attr_writer :secret
 end
-
-
