@@ -4,7 +4,12 @@ class RsvpsController < ApplicationController
 
   def show
     @object = form_class.new(cookies: cookies)
-    render_wizard
+
+    if @object.viewable?
+      render_wizard
+    else
+      redirect_to(rsvp_path(previous_step))
+    end
   end
 
   def update

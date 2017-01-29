@@ -12,6 +12,12 @@ RSpec.describe RsvpBaseForm do
     end
   end
 
+  describe '#viewable?' do
+    it 'returns true' do
+      expect(subject.viewable?).to be true
+    end
+  end
+
   describe '#save' do
     it 'raises not implement error' do
       expect {

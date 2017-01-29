@@ -10,6 +10,10 @@ class RsvpBaseForm
     end
   end
 
+  def viewable?
+    true
+  end
+
   def save
     raise NotImplementedError, 'Sorry, you have to override save'
   end

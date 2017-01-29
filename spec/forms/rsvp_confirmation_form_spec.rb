@@ -16,4 +16,38 @@ RSpec.describe RsvpConfirmationForm do
       expect(subject.people).to match_array(people)
     end
   end
+
+  describe '#viewable?' do
+    let(:rsvp_code) { create(:rsvp_code) }
+    let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
+    before { rsvp_code.people << people }
+
+    context 'valid rsvp_code' do
+      context 'and peoples attendance marked' do
+        let(:people) do
+          [
+            create(:person, attending: true),
+            create(:person, attending: false)
+          ]
+        end
+
+        it 'returns true' do
+          expect(subject.viewable?).to be true
+        end
+      end
+
+      context 'a persons attendance not marked' do
+        let(:people) do
+          [
+            create(:person),
+            create(:person, attending: false)
+          ]
+        end
+
+        it 'returns true' do
+          expect(subject.viewable?).to be false
+        end
+      end
+    end
+  end
 end
