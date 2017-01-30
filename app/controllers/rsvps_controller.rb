@@ -18,7 +18,7 @@ class RsvpsController < ApplicationController
     render_wizard @object
   end
 
-  steps :enter_code, :attendance, :confirmation
+  steps :enter_code, :attendance, :food, :confirmation
 
   private
 
@@ -42,10 +42,33 @@ class RsvpsController < ApplicationController
         )
       }
     }
+    h[:food] = {
+      klass: RsvpFoodForm,
+      params: -> (params) {
+        params.require(:rsvp_food_form).permit(
+          people_attributes: [
+            :id,
+            food_choices_attributes: [:food, :id],
+          ]
+        )
+      }
+    }
     h[:confirmation] = {
       klass: RsvpConfirmationForm,
       params: -> (_) { {} }
     }
+  end
+
+  def process_resource!(resource)
+    if resource && resource.save
+      if resource.finish_early?
+        @skip_to ||= :confirmation
+      else
+        @skip_to ||= @next_step
+      end
+    else
+      @skip_to = nil
+    end
   end
 
   def form_class

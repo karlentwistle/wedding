@@ -63,7 +63,10 @@ RSpec.describe "RSVP", :type => :request do
       context 'attendance step not completed' do
         it "redirects to 'attendance'" do
           get rsvp_path('confirmation')
+          expect(response).to redirect_to(rsvp_path('food'))
+          follow_redirect!
           expect(response).to redirect_to(rsvp_path('attendance'))
+          follow_redirect!
         end
       end
 

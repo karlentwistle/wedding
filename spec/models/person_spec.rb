@@ -18,4 +18,23 @@ RSpec.describe Person, type: :model do
       expect(subject.save).to be false
     end
   end
+
+  Food.sittings.each do |sitting, index|
+    describe "##{sitting}_choice" do
+      context "has picked a #{sitting}" do
+        it "returns their #{sitting}" do
+          subject.save
+          food = create(:food, sitting: index)
+          create(:food_choice, food: food, person: subject)
+          expect(subject.send("#{sitting}_choice")).to eql(food)
+        end
+      end
+
+      context "hasnt picked a #{sitting}" do
+        it "returns nil" do
+          expect(subject.send("#{sitting}_choice")).to be nil
+        end
+      end
+    end
+  end
 end

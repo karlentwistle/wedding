@@ -5,12 +5,16 @@ class RsvpAttendanceForm < RsvpBaseForm
 
   validate :all_people_present
 
+  def finish_early?
+    people.where(attending: true).empty?
+  end
+
   def save
     if valid?
       Person.transaction do
-        people_attributes.each do |_, attendance|
-          person = people.find(attendance[:id])
-          person.attending = attendance[:attending]
+        people_attributes.each do |_, person_attributes|
+          person = people.find(person_attributes[:id])
+          person.attending = person_attributes[:attending]
           person.save!
         end
       end
@@ -21,7 +25,7 @@ class RsvpAttendanceForm < RsvpBaseForm
     end
   end
 
-  delegate :people, to: :rsvp_code, prefix: false, allow_nil: false
+  delegate :people, :people_attending, to: :rsvp_code, prefix: false, allow_nil: false
 
   attr_writer :people_attributes
 
@@ -29,8 +33,8 @@ class RsvpAttendanceForm < RsvpBaseForm
 
   def submitted_people
     @submitted_people ||= people.find(
-      people_attributes.to_h.map do |_, attendance|
-        attendance[:id]
+      people_attributes.to_h.map do |_, person_attributes|
+        person_attributes[:id]
       end
     )
   end

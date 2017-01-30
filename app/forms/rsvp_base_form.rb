@@ -5,6 +5,7 @@ class RsvpBaseForm
 
   def initialize(cookies: nil, params: {})
     @cookies = cookies
+    @params = params
     params.each do |key, value|
       send("#{key}=", value)
     end
@@ -12,6 +13,10 @@ class RsvpBaseForm
 
   def viewable?
     true
+  end
+
+  def finish_early?
+    false
   end
 
   def save
@@ -24,5 +29,5 @@ class RsvpBaseForm
 
   private
 
-  attr_reader :cookies
+  attr_reader :cookies, :params
 end

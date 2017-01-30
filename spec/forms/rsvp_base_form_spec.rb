@@ -18,6 +18,12 @@ RSpec.describe RsvpBaseForm do
     end
   end
 
+  describe '#finish_early?' do
+    it 'returns false' do
+      expect(subject.finish_early?).to be false
+    end
+  end
+
   describe '#save' do
     it 'raises not implement error' do
       expect {

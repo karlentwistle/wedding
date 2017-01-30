@@ -5,4 +5,8 @@ class RsvpCode < ApplicationRecord
   def to_s
     secret
   end
+
+  def people_attending
+    people.where(attending: true)
+  end
 end
