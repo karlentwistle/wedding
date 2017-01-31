@@ -147,8 +147,6 @@ RSpec.describe RsvpFoodForm do
       context 'invalid food choices' do
         context 'choices left blank' do
           let(:starter) { create(:food, sitting: 0) }
-          let(:main) { create(:food, sitting: 1) }
-          let(:dessert) { create(:food, sitting: 2) }
           let(:people) { [ create(:person, attending: true) ] }
           let(:rsvp_code) { create(:rsvp_code) }
           let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }

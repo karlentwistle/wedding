@@ -31,29 +31,30 @@ class RsvpAttendanceForm < RsvpBaseForm
 
   def people_attributes=(people_attributes)
     people_attributes.to_h.each do |_, person_attributes|
-      person = people.find do |person|
+      person = people.find(
+        -> { raise ActiveRecord::RecordNotFound }
+      ) do |person|
         person.id == person_attributes[:id].to_i
       end
 
-      if person
-        person.attending = person_attributes[:attending]
-      end
+      person.attending = person_attributes[:attending]
     end
   end
 
   private
 
   def submitted_people
-    params
+    people_ids = params
       .fetch(:people_attributes, {})
       .values
-      .map do |params|
-        people.find_by!(params.slice(:id))
-      end
+      .map {|p| p[:id]}
+      .compact
+
+    people.where(id: people_ids)
   end
 
   def validate_submitted_people
-    if submitted_people.length < people.length
+    if submitted_people.count < people.count
       errors.add(:base, 'a person is missing')
     end
   end

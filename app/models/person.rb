@@ -7,7 +7,6 @@ class Person < ApplicationRecord
   end
 
   has_many :food_choices, -> { order(:sitting) }
-  validates_associated :food_choices
 
   def food_choices_attributes=(*args); end
 
