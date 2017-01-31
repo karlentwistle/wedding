@@ -19,6 +19,22 @@ RSpec.describe Person, type: :model do
     end
   end
 
+  describe 'attending=' do
+    context 'person has associated food choices' do
+      context 'attending set to false' do
+        it 'destroy associated food choices' do
+          create(:food_choice, person: subject)
+
+          subject.attending = false
+          subject.save
+          subject.reload
+
+          expect(subject.food_choices).to be_empty
+        end
+      end
+    end
+  end
+
   Food.sittings.each do |sitting, index|
     describe "##{sitting}_choice" do
       context "has picked a #{sitting}" do
