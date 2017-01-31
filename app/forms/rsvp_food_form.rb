@@ -3,17 +3,19 @@ class RsvpFoodForm < RsvpBaseForm
   include ActiveModel::Conversion
   include RsvpCodeFetcher
 
-  validate :all_submitted_people_belong_to_rsvp
+  validate :validate_submitted_people
 
   def viewable?
     people.any?
   end
 
   def people
-    @people ||= rsvp_code.people_attending.each do |person|
-      person.food_choices.find_or_initialize_by(sitting: 0)
-      person.food_choices.find_or_initialize_by(sitting: 1)
-      person.food_choices.find_or_initialize_by(sitting: 2)
+    @people ||= rsvp_code.people_attending.tap do |people|
+      people.each do |person|
+        Food.sittings.values.each do |sitting_id|
+          person.food_choices.find_or_initialize_by(sitting: sitting_id)
+        end
+      end
     end
   end
 
@@ -54,14 +56,18 @@ class RsvpFoodForm < RsvpBaseForm
     end
   end
 
-  def all_submitted_people_belong_to_rsvp
+  def submitted_people
     params
       .fetch(:people_attributes, {})
       .values
-      .each do |params|
-        rsvp_code
-          .people
-          .find_by!(params.slice(:id))
+      .map do |params|
+        people.find_by!(params.slice(:id))
+      end
+  end
+
+  def validate_submitted_people
+    if submitted_people.length < people.length
+      errors.add(:base, 'a person is missing')
     end
   end
 end
