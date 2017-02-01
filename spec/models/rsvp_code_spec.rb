@@ -18,6 +18,22 @@ RSpec.describe RsvpCode, type: :model do
       duplicate_rsvp_code = build(:rsvp_code, secret: existing_rsvp_code.secret)
       expect(duplicate_rsvp_code.save).to be false
     end
+
+    it 'is invalid without a true of false value for breakfast' do
+      subject.breakfast = ''
+      expect(subject.save).to be false
+    end
+
+    it 'is invalid without a true of false value for reception' do
+      subject.reception  = ''
+      expect(subject.save).to be false
+    end
+
+    it 'is invalid if breakfast and reception are false' do
+      subject.reception  = false
+      subject.breakfast  = false
+      expect(subject.save).to be false
+    end
   end
 
   describe '#people' do
