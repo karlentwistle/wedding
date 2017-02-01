@@ -1,9 +1,8 @@
 class RsvpConfirmationForm < RsvpBaseForm
-  include RsvpCodeFetcher
-
   delegate :people, to: :rsvp_code, prefix: false, allow_nil: false
+  delegate :breakfast, to: :rsvp_code, prefix: false, allow_nil: false
 
   def viewable?
-    !people.map(&:attending_breakfast).any?(&:nil?)
+    rsvp_code.persisted? && rsvp_code.responded?
   end
 end

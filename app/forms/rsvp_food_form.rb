@@ -1,12 +1,11 @@
 class RsvpFoodForm < RsvpBaseForm
   include ActiveModel::Validations
   include ActiveModel::Conversion
-  include RsvpCodeFetcher
 
   validate :validate_submitted_people
 
   def viewable?
-    people.any?
+    rsvp_code.persisted? && people.any?
   end
 
   def people

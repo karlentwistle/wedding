@@ -1,15 +1,19 @@
 class RsvpAttendanceForm < RsvpBaseForm
   include ActiveModel::Validations
   include ActiveModel::Conversion
-  include RsvpCodeFetcher
+
+  delegate :people, to: :rsvp_code, prefix: false, allow_nil: false
+  delegate :breakfast, to: :rsvp_code, prefix: false, allow_nil: false
 
   validate :validate_submitted_people
+
+  def viewable?
+    rsvp_code.persisted?
+  end
 
   def finish_early?
     people.where(attending_breakfast: true).empty?
   end
-
-  delegate :people, to: :rsvp_code, prefix: false, allow_nil: false
 
   def save
     if valid?

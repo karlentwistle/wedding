@@ -1,14 +1,15 @@
 require 'rails_helper'
 
-feature 'User responds to RSVP' do
+feature 'User responds to breakfast RSVP' do
   before { visit_rsvp }
+
+  let(:rsvp_code) { create(:rsvp_code, secret: '1234', breakfast: true, reception: true) }
 
   scenario 'valid secret code (1 invitee)
             Person A
               breakfast: false
               reception: false
             then redirected to confirmation page' do
-    rsvp_code = create(:rsvp_code, secret: '1234')
     person_a = create(:person)
     rsvp_code.people << [person_a]
 
@@ -29,7 +30,6 @@ feature 'User responds to RSVP' do
               breakfast: false
               reception: true
             then redirected to confirmation page' do
-    rsvp_code = create(:rsvp_code, secret: '1234')
     person_a, person_b = create(:person), create(:person)
     rsvp_code.people << [person_a, person_b]
 
@@ -54,7 +54,6 @@ feature 'User responds to RSVP' do
               reception: true
             then select food choices for Person A only
             and redirected to confirmation page' do
-    rsvp_code = create(:rsvp_code, secret: '1234')
     person_a, person_b = create(:person), create(:person)
     starter = create(:food, sitting: 0)
     main = create(:food, sitting: 1)

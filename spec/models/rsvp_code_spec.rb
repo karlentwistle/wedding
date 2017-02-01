@@ -58,6 +58,81 @@ RSpec.describe RsvpCode, type: :model do
     end
   end
 
+  describe 'responded?' do
+    context 'no people associated' do
+      it { expect(subject.responded?).to be false }
+    end
+
+    context 'people associated' do
+      context 'breakfast' do
+        subject { create(:rsvp_code, breakfast: true, reception: true) }
+        let(:people) { [create(:person), create(:person)] }
+        before { subject.people << people }
+
+        context 'no people responded' do
+          it { expect(subject.responded?).to be false }
+        end
+
+        context 'some people responded' do
+          before do
+            people.first.update_attributes(
+              attending_breakfast: true,
+              attending_reception: false
+            )
+          end
+
+          it { expect(subject.responded?).to be false }
+        end
+
+        context 'all people responded' do
+          before do
+            people.each do |person|
+              person.update_attributes(
+                attending_breakfast: true,
+                attending_reception: false
+              )
+            end
+          end
+
+          it { expect(subject.responded?).to be true }
+        end
+      end
+
+      context 'reception' do
+        subject { create(:rsvp_code, breakfast: false, reception: true) }
+        let(:people) { [create(:person), create(:person)] }
+        before { subject.people << people }
+
+        context 'no people responded' do
+          it { expect(subject.responded?).to be false }
+        end
+
+        context 'some people responded' do
+          before do
+            people.first.update_attributes(
+              attending_reception: false
+            )
+          end
+
+          it { expect(subject.responded?).to be false }
+        end
+
+        context 'all people responded' do
+          before do
+            people.each do |person|
+              person.update_attributes(
+                attending_reception: false
+              )
+            end
+          end
+
+          it { expect(subject.responded?).to be true }
+        end
+      end
+
+    end
+  end
+
   describe '#people_attending_breakfast' do
     let(:people_attending_breakfast) { [] }
     let(:people_not_attending_breakfast) { [] }

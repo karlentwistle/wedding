@@ -1,9 +1,16 @@
-rsvp_code = RsvpCode.create!(secret: '1234')
+rsvp_code = RsvpCode.create!(secret: '1234', breakfast: true, reception: true)
 
 person_a = Person.create(full_name: 'Karl Entwistle')
 person_b = Person.create(full_name: 'Hannah Sergeant')
 
 rsvp_code.people << [person_a, person_b]
+
+reception_rsvp_code = RsvpCode.create!(secret: '4321', breakfast: false, reception: true)
+
+person_c = Person.create(full_name: 'Tom Coates')
+person_d = Person.create(full_name: 'Ruth Aberdeen')
+
+reception_rsvp_code.people << [person_c, person_d]
 
 Food.create(
   [

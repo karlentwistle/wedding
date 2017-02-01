@@ -1,10 +1,9 @@
 class RsvpsController < ApplicationController
   include Wicked::Wizard
-  rescue_from ActiveRecord::RecordNotFound, with: :redirect_to_first_step
+  prepend_before_action :set_steps
 
   def show
-    @object = form_class.new(cookies: cookies)
-
+    @object = form_class.new(rsvp_code: rsvp_code)
     if @object.viewable?
       render_wizard
     else
@@ -13,14 +12,29 @@ class RsvpsController < ApplicationController
   end
 
   def update
-    @object = form_class.new(cookies: cookies, params: whitelisted_params)
+    @object = form_class.new(
+      rsvp_code: rsvp_code,
+      params: whitelisted_params
+    )
     set_cookies
     render_wizard @object
   end
 
-  steps :enter_code, :attendance, :food, :confirmation
-
   private
+
+  def set_steps
+    if rsvp_code.breakfast
+      self.steps = [:enter_code, :attendance, :food, :confirmation]
+    else
+      self.steps = [:enter_code, :attendance, :confirmation]
+    end
+  end
+
+  def rsvp_code
+    @rsvp_code ||= RsvpCode.find_by(
+      secret: cookies[:rsvp_code_secret]
+    ) || NullRsvpCode.new
+  end
 
   NULL_STEP = {
     klass: RsvpNullStepForm,
@@ -87,9 +101,5 @@ class RsvpsController < ApplicationController
     @object.cookie_payload.each do |key, value|
       cookies[key] = value
     end
-  end
-
-  def redirect_to_first_step
-    redirect_to(rsvps_path)
   end
 end

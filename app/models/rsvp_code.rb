@@ -11,6 +11,21 @@ class RsvpCode < ApplicationRecord
     secret
   end
 
+  def responded?
+    return false unless people.present?
+
+    if breakfast?
+      people.where(
+        attending_breakfast: nil,
+        attending_reception: nil
+      ).empty?
+    elsif reception?
+      people.where(
+        attending_reception: nil
+      ).empty?
+    end
+  end
+
   def people_attending_breakfast
     people.where(attending_breakfast: true)
   end

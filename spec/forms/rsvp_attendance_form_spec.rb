@@ -1,16 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe RsvpAttendanceForm do
-  let(:secret) { nil }
   let(:people_attributes) { {} }
-  let(:cookies) { { rsvp_code_secret: secret } }
+  let(:rsvp_code) { NullRsvpCode.new }
   let(:params) { { people_attributes: people_attributes } }
-  let(:subject) { described_class.new(cookies: cookies, params: params) }
+  let(:subject) { described_class.new(rsvp_code: rsvp_code, params: params) }
+
+  context 'no persisted rsvp_code' do
+    it 'returns false' do
+      expect(subject.viewable?).to be false
+    end
+  end
+
+  describe '#breakfast' do
+    let(:rsvp_code) { create(:rsvp_code) }
+
+    it 'delegates to rsvp_code assosicated people' do
+      expect(subject.breakfast).to eql(rsvp_code.breakfast)
+    end
+  end
 
   describe '#people' do
     let(:people) { [create(:person), create(:person)] }
     let(:rsvp_code) { create(:rsvp_code) }
-    let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
     before { rsvp_code.people << people }
 
     it 'delegates to rsvp_code assosicated people' do
@@ -22,7 +34,6 @@ RSpec.describe RsvpAttendanceForm do
     context 'valid params' do
       let(:people) { [create(:person), create(:person)] }
       let(:rsvp_code) { create(:rsvp_code) }
-      let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
       let(:people_attributes) do
         {
           "0": { attending_breakfast: "0", attending_reception: "1", id: people[0].id },
@@ -69,7 +80,6 @@ RSpec.describe RsvpAttendanceForm do
         context 'person missing' do
           let(:people) { [create(:person), create(:person)] }
           let(:rsvp_code) { create(:rsvp_code) }
-          let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
           before { rsvp_code.people << people.sample }
 
           it 'returns false' do
@@ -85,7 +95,6 @@ RSpec.describe RsvpAttendanceForm do
         context 'extra person' do
           let(:people) { [create(:person), create(:person)] }
           let(:rsvp_code) { create(:rsvp_code) }
-          let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
           let(:people_attributes) do
             {
               "0": { id: people[0].id },

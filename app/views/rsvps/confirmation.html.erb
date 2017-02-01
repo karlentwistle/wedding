@@ -1,11 +1,20 @@
 <main>
   <ul>
-    <% @object.people.each do |person| %>
-      <li>
-        <%= person %> -
-        breakfast: <%= person.attending_breakfast %>,
-        reception: <%= person.attending_reception %>
-      </li>
+    <% if @object.breakfast %>
+      <% @object.people.each do |person| %>
+        <li>
+          <%= person %> -
+          breakfast: <%= person.attending_breakfast %>,
+          reception: <%= person.attending_reception %>
+        </li>
+      <% end %>
+    <% else %>
+      <% @object.people.each do |person| %>
+        <li>
+          <%= person %> -
+          reception: <%= person.attending_reception %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </main>

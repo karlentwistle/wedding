@@ -1,18 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe RsvpFoodForm do
-  let(:secret) { nil }
   let(:people_attributes) { {} }
-  let(:cookies) { { rsvp_code_secret: secret } }
+  let(:rsvp_code) { NullRsvpCode.new }
   let(:params) { { people_attributes: people_attributes } }
-  let(:subject) { described_class.new(cookies: cookies, params: params) }
+  let(:subject) { described_class.new(rsvp_code: rsvp_code, params: params) }
 
   describe '#viewable?' do
-    let(:rsvp_code) { create(:rsvp_code) }
-    let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
-    before { rsvp_code.people << people }
+    context 'no persisted rsvp_code' do
+      it 'returns false' do
+        expect(subject.viewable?).to be false
+      end
+    end
 
     context 'valid rsvp_code' do
+      let(:rsvp_code) { create(:rsvp_code) }
+      before { rsvp_code.people << people }
+
       context 'and people attending_breakfast' do
         let(:people) do
           [
@@ -43,10 +47,9 @@ RSpec.describe RsvpFoodForm do
 
   describe '#people' do
     it 'delegates to rsvp_code.people_attending_breakfast' do
-      rsvp_code_spy = spy('rsvp_code')
-      allow(RsvpCode).to receive(:find_by!).and_return(rsvp_code_spy)
-      subject.people
-      expect(rsvp_code_spy).to have_received(:people_attending_breakfast)
+      people = [Person.new]
+      allow(rsvp_code).to receive(:people_attending_breakfast).and_return(people)
+      expect(subject.people).to eql(people)
     end
   end
 
@@ -65,7 +68,6 @@ RSpec.describe RsvpFoodForm do
         ]
       }
       let(:rsvp_code) { create(:rsvp_code) }
-      let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
       let(:people_attributes) do
         {
           "0": {
@@ -127,7 +129,6 @@ RSpec.describe RsvpFoodForm do
             ]
           }
           let(:rsvp_code) { create(:rsvp_code) }
-          let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
           let(:people_attributes) do
             {
               "0": { id: people[0].id },
@@ -149,7 +150,6 @@ RSpec.describe RsvpFoodForm do
           let(:starter) { create(:food, sitting: 0) }
           let(:people) { [ create(:person, attending_breakfast: true) ] }
           let(:rsvp_code) { create(:rsvp_code) }
-          let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
           let(:people_attributes) do
             {
               "0": {

@@ -3,8 +3,8 @@ class RsvpBaseForm
     false
   end
 
-  def initialize(cookies: nil, params: {})
-    @cookies = cookies
+  def initialize(rsvp_code: nil, params: {})
+    @rsvp_code = rsvp_code
     @params = params
     params.each do |key, value|
       send("#{key}=", value)
@@ -29,5 +29,5 @@ class RsvpBaseForm
 
   private
 
-  attr_reader :cookies, :params
+  attr_reader :rsvp_code, :params
 end

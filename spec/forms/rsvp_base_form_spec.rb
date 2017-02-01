@@ -2,9 +2,9 @@ require 'spec_helper'
 require_relative '../../app/forms/rsvp_base_form'
 
 RSpec.describe RsvpBaseForm do
-  let(:cookies) { nil }
+  let(:rsvp_code) { NullRsvpCode.new }
   let(:params) { {} }
-  subject { described_class.new(cookies: cookies, params: params) }
+  subject { described_class.new(rsvp_code: rsvp_code, params: params) }
 
   describe '#persisted?' do
     it 'returns false' do
