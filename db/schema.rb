@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(version: 20170129181132) do
   enable_extension "plpgsql"
 
   create_table "food_choices", force: :cascade do |t|
-    t.integer  "person_id"
-    t.integer  "food_id"
-    t.integer  "sitting"
+    t.integer  "person_id",  null: false
+    t.integer  "food_id",    null: false
+    t.integer  "sitting",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["food_id"], name: "index_food_choices_on_food_id", using: :btree
@@ -26,26 +26,28 @@ ActiveRecord::Schema.define(version: 20170129181132) do
   end
 
   create_table "foods", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "sitting"
+    t.string   "title",      null: false
+    t.integer  "sitting",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["sitting"], name: "index_foods_on_sitting", using: :btree
   end
 
   create_table "people", force: :cascade do |t|
     t.string   "full_name",           null: false
     t.boolean  "attending_breakfast"
     t.boolean  "attending_reception"
-    t.integer  "rsvp_code_id"
+    t.integer  "rsvp_code_id",        null: false
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.index ["rsvp_code_id"], name: "index_people_on_rsvp_code_id", using: :btree
   end
 
   create_table "rsvp_codes", force: :cascade do |t|
-    t.string   "secret"
+    t.string   "secret",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["secret"], name: "index_rsvp_codes_on_secret", using: :btree
   end
 
 end
