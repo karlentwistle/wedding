@@ -71,13 +71,13 @@ RSpec.describe "RSVP", :type => :request do
       end
 
       context 'attendance step completed' do
-        let(:attending) { ['0', '1'].sample }
+        let(:attending_breakfast) { ['0', '1'].sample }
 
         before do
           put rsvp_path('attendance'), params: {
             rsvp_attendance_form: {
               people_attributes: {
-                "0": { attending: attending, id: person.id }
+                "0": { attending_breakfast: attending_breakfast, id: person.id }
               }
             }
           }

@@ -38,7 +38,7 @@ class RsvpsController < ApplicationController
       klass: RsvpAttendanceForm,
       params: -> (params) {
         params.require(:rsvp_attendance_form).permit(
-          people_attributes: [:attending, :id]
+          people_attributes: [:attending_breakfast, :id]
         )
       }
     }

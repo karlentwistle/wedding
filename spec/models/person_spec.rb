@@ -19,13 +19,13 @@ RSpec.describe Person, type: :model do
     end
   end
 
-  describe 'attending=' do
+  describe 'attending_breakfast=' do
     context 'person has associated food choices' do
-      context 'attending set to false' do
+      context 'attending_breakfast set to false' do
         it 'destroy associated food choices' do
           create(:food_choice, person: subject)
 
-          subject.attending = false
+          subject.attending_breakfast = false
           subject.save
           subject.reload
 

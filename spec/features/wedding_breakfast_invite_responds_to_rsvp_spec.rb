@@ -19,8 +19,8 @@ feature 'User responds to RSVP' do
   end
 
   scenario 'their secret code is correct
-            they mark all guests not attending
-            they select food for the guests that are attending
+            they mark all guests not attending_breakfast
+            they select food for the guests that are attending_breakfast
             and are redirected to confirmation page' do
     rsvp_code = create(:rsvp_code, secret: '1234')
     person_a, person_b = create(:person), create(:person)
@@ -38,8 +38,8 @@ feature 'User responds to RSVP' do
   end
 
   scenario 'their secret code is correct
-            they mark some guests as attending some not attending
-            they select food for the guests that are attending
+            they mark some guests as attending_breakfast some not attending_breakfast
+            they select food for the guests that are attending_breakfast
             and are redirected to confirmation page' do
     rsvp_code = create(:rsvp_code, secret: '1234')
     person_a, person_b = create(:person), create(:person)
@@ -79,9 +79,9 @@ feature 'User responds to RSVP' do
   end
 
   def submit_attendance(people)
-    people.each do |person, attending|
+    people.each do |person, attending_breakfast|
       within("div[data-id=\"#{person.id}\"]") do
-        check 'Attending' if attending
+        check 'Attending breakfast' if attending_breakfast
       end
     end
 

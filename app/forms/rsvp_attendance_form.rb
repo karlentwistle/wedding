@@ -6,7 +6,7 @@ class RsvpAttendanceForm < RsvpBaseForm
   validate :validate_submitted_people
 
   def finish_early?
-    people.where(attending: true).empty?
+    people.where(attending_breakfast: true).empty?
   end
 
   delegate :people, to: :rsvp_code, prefix: false, allow_nil: false
@@ -37,7 +37,7 @@ class RsvpAttendanceForm < RsvpBaseForm
         person.id == person_attributes[:id].to_i
       end
 
-      person.attending = person_attributes[:attending]
+      person.attending_breakfast = person_attributes[:attending_breakfast]
     end
   end
 

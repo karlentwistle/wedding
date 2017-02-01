@@ -26,8 +26,8 @@ RSpec.describe RsvpConfirmationForm do
       context 'and peoples attendance marked' do
         let(:people) do
           [
-            create(:person, attending: true),
-            create(:person, attending: false)
+            create(:person, attending_breakfast: true),
+            create(:person, attending_breakfast: false)
           ]
         end
 
@@ -40,7 +40,7 @@ RSpec.describe RsvpConfirmationForm do
         let(:people) do
           [
             create(:person),
-            create(:person, attending: false)
+            create(:person, attending_breakfast: false)
           ]
         end
 

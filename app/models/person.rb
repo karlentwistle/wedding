@@ -2,7 +2,7 @@ class Person < ApplicationRecord
   validates :full_name, presence: true
   validates :rsvp_code, presence: true
 
-  after_save :destroy_food_choices, unless: :attending
+  after_save :destroy_food_choices, unless: :attending_breakfast
 
   def to_s
     full_name

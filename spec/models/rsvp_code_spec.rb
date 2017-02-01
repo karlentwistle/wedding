@@ -42,10 +42,10 @@ RSpec.describe RsvpCode, type: :model do
     end
   end
 
-  describe '#people_attending' do
-    let(:people_attending) { [] }
-    let(:people_not_attending) { [] }
-    let(:people) { people_attending + people_not_attending }
+  describe '#people_attending_breakfast' do
+    let(:people_attending_breakfast) { [] }
+    let(:people_not_attending_breakfast) { [] }
+    let(:people) { people_attending_breakfast + people_not_attending_breakfast }
     before do
       subject.save
       subject.people << people
@@ -53,36 +53,36 @@ RSpec.describe RsvpCode, type: :model do
 
     context 'no people associated' do
       it 'is empty' do
-        expect(subject.people_attending).to be_empty
+        expect(subject.people_attending_breakfast).to be_empty
       end
     end
 
-    context 'no attending people' do
-      let(:people_not_attending) do
+    context 'no attending_breakfast people' do
+      let(:people_not_attending_breakfast) do
         [
-          create(:person, attending: false),
-          create(:person, attending: false),
+          create(:person, attending_breakfast: false),
+          create(:person, attending_breakfast: false),
         ]
       end
 
       it 'is empty' do
-        expect(subject.people_attending).to be_empty
+        expect(subject.people_attending_breakfast).to be_empty
       end
     end
 
-    context 'some attending people some not' do
-      let(:people_attending) do
+    context 'some attending_breakfast people some not' do
+      let(:people_attending_breakfast) do
         [
-          create(:person, attending: true),
-          create(:person, attending: true),
+          create(:person, attending_breakfast: true),
+          create(:person, attending_breakfast: true),
         ]
       end
-      let(:people_not_attending) do
-        [ create(:person, attending: false) ]
+      let(:people_not_attending_breakfast) do
+        [ create(:person, attending_breakfast: false) ]
       end
 
-      it 'returns only attending people' do
-        expect(subject.people_attending).to match_array(people_attending)
+      it 'returns only attending_breakfast people' do
+        expect(subject.people_attending_breakfast).to match_array(people_attending_breakfast)
       end
     end
   end

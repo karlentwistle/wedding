@@ -6,7 +6,7 @@ class RsvpCode < ApplicationRecord
     secret
   end
 
-  def people_attending
-    people.where(attending: true)
+  def people_attending_breakfast
+    people.where(attending_breakfast: true)
   end
 end
