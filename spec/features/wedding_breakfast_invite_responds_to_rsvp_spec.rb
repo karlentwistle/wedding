@@ -1,22 +1,7 @@
 require 'rails_helper'
 
 feature 'User responds to RSVP' do
-  before do
-    visit root_path
-    within '.centered-navigation' do
-      click_link 'RSVP'
-    end
-  end
-
-  scenario 'no secret code entered' do
-    submit_code
-    expect(page).to have_content "can't be blank"
-  end
-
-  scenario 'secret code cant be found' do
-    submit_code('1234')
-    expect(page).to have_content "unfortunately your code wasn't found"
-  end
+  before { visit_rsvp }
 
   scenario 'valid secret code (1 invitee)
             Person A
@@ -101,33 +86,4 @@ feature 'User responds to RSVP' do
     expect(page).to have_content "#{person_a.full_name} - breakfast: true, reception: false"
     expect(page).to have_content "#{person_b.full_name} - breakfast: false, reception: true"
   end
-
-  def submit_code(secret=nil)
-    fill_in 'Secret', with: secret if secret
-    click_button 'Next'
-  end
-
-  def submit_attendance(opts={})
-    opts.each do |person, attending_choices|
-      within("div[data-id=\"#{person.id}\"]") do
-        check 'Attending breakfast' if attending_choices.fetch(:breakfast, false)
-        check 'Attending reception' if attending_choices.fetch(:reception, false)
-      end
-    end
-
-    click_button 'Next'
-  end
-
-  def submit_food_choices(opts={})
-    opts.each do |person, food_choices|
-      within("div[data-id=\"#{person.id}\"]") do
-        food_choices.each do |label, food|
-          page.select(food.title, from: label)
-        end
-      end
-    end
-
-    click_button 'Next'
-  end
-
 end
