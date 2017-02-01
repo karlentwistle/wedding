@@ -25,8 +25,8 @@ RSpec.describe RsvpAttendanceForm do
       let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
       let(:people_attributes) do
         {
-          "0": { attending_breakfast: "0", id: people[0].id },
-          "1": { attending_breakfast: "1", id: people[1].id },
+          "0": { attending_breakfast: "0", attending_reception: "1", id: people[0].id },
+          "1": { attending_breakfast: "1", attending_reception: "0", id: people[1].id },
         }
       end
       before { rsvp_code.people << people }
@@ -42,13 +42,21 @@ RSpec.describe RsvpAttendanceForm do
         expect(people[0].attending_breakfast).to be false
         expect(people[1].attending_breakfast).to be true
       end
+
+      it 'updates peoples attending_reception based on params' do
+        subject.save
+        people.each(&:reload)
+
+        expect(people[0].attending_reception).to be true
+        expect(people[1].attending_reception).to be false
+      end
     end
 
     context 'invalid params' do
       context 'invalid people_attributes' do
         context 'not found in database' do
           let(:people_attributes) do
-            { "0": { attending_breakfast: "0", id: 666 } }
+            { "0": { id: 666 } }
           end
 
           it 'raises ActiveRecord::RecordNotFound' do
@@ -80,8 +88,8 @@ RSpec.describe RsvpAttendanceForm do
           let(:cookies) { {rsvp_code_secret: rsvp_code.secret} }
           let(:people_attributes) do
             {
-              "0": { attending_breakfast: "0", id: people[0].id },
-              "1": { attending_breakfast: "1", id: people[1].id },
+              "0": { id: people[0].id },
+              "1": { id: people[1].id },
             }
           end
           before { rsvp_code.people << people.sample }

@@ -1,7 +1,11 @@
 <main>
   <ul>
     <% @object.people.each do |person| %>
-      <li><%= person %> - <%= person.attending_breakfast %></li>
+      <li>
+        <%= person %> -
+        breakfast: <%= person.attending_breakfast %>,
+        reception: <%= person.attending_reception %>
+      </li>
     <% end %>
   </ul>
 </main>

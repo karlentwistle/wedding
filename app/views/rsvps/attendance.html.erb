@@ -4,6 +4,7 @@
       <%= content_tag(:div, class: 'person', data: {id: person.object.id}) do %>
         <%= person.object.full_name %>
         <%= person.input :attending_breakfast %>
+        <%= person.input :attending_reception %>
       <% end %>
     <% end %>
 

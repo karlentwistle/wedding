@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20170129181132) do
   create_table "people", force: :cascade do |t|
     t.string   "full_name",           null: false
     t.boolean  "attending_breakfast"
+    t.boolean  "attending_reception"
     t.integer  "rsvp_code_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false

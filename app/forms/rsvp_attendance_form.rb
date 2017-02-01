@@ -37,6 +37,7 @@ class RsvpAttendanceForm < RsvpBaseForm
         person.id == person_attributes[:id].to_i
       end
 
+      person.attending_reception = person_attributes[:attending_reception]
       person.attending_breakfast = person_attributes[:attending_breakfast]
     end
   end
