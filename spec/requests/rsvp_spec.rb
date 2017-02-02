@@ -46,10 +46,10 @@ RSpec.describe "RSVP", :type => :request do
 
   describe 'food' do
     context 'no rsvp_code_secret (cookie)' do
-      it "raises Wicked::Wizard::InvalidStepError" do
+      it "raises ActionController::RoutingError" do
         expect {
           get rsvp_path('food')
-        }.to raise_error(Wicked::Wizard::InvalidStepError)
+        }.to raise_error(ActionController::RoutingError)
       end
     end
 
@@ -61,10 +61,10 @@ RSpec.describe "RSVP", :type => :request do
       end
 
       context 'rsvp_code not breakfast invite' do
-        it "raises Wicked::Wizard::InvalidStepError" do
+        it "raises ActionController::RoutingError" do
           expect {
             get rsvp_path('food')
-          }.to raise_error(Wicked::Wizard::InvalidStepError)
+          }.to raise_error(ActionController::RoutingError)
         end
       end
 

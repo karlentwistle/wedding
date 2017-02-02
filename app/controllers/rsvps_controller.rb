@@ -1,5 +1,7 @@
 class RsvpsController < ApplicationController
   include Wicked::Wizard
+  rescue_from Wicked::Wizard::InvalidStepError, with: :not_found
+
   prepend_before_action :set_steps
 
   def show
