@@ -66,6 +66,7 @@ class RsvpsController < ApplicationController
         params.require(:rsvp_food_form).permit(
           people_attributes: [
             :id,
+            :dietary_requirements,
             food_choices_attributes: [:food, :id],
           ]
         )

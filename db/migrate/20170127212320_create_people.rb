@@ -5,6 +5,7 @@ class CreatePeople < ActiveRecord::Migration[5.0]
       t.boolean :attending_breakfast
       t.boolean :attending_reception
       t.belongs_to :rsvp_code, index: true, null: false
+      t.string :dietary_requirements
 
       t.timestamps
     end

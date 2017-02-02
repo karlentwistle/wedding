@@ -69,18 +69,19 @@ feature 'User responds to breakfast RSVP' do
       person_b => { breakfast: false, reception: true},
     })
 
-    submit_food_choices({
-      person_a => {
-        'Starter': starter,
+    submit_food_choices(
+      person_a, {
+        starter: starter,
+        dietary_requirements: 'Gluten Free Meal'
       }
-    })
+    )
 
-    submit_food_choices({
-      person_a => {
-        'Main': main,
-        'Dessert': dessert
+    submit_food_choices(
+      person_a, {
+        main: main,
+        dessert: dessert
       }
-    })
+    )
 
     expect(page).to have_content "#{person_a.full_name} - breakfast: true, reception: false"
     expect(page).to have_content "#{person_b.full_name} - breakfast: false, reception: true"

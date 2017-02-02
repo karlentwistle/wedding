@@ -34,12 +34,13 @@ ActiveRecord::Schema.define(version: 20170129181132) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.string   "full_name",           null: false
+    t.string   "full_name",            null: false
     t.boolean  "attending_breakfast"
     t.boolean  "attending_reception"
-    t.integer  "rsvp_code_id",        null: false
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.integer  "rsvp_code_id",         null: false
+    t.string   "dietary_requirements"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.index ["rsvp_code_id"], name: "index_people_on_rsvp_code_id", using: :btree
   end
 

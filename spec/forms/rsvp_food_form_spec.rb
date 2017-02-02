@@ -77,6 +77,7 @@ RSpec.describe RsvpFoodForm do
               "2": {food: dessert_a.id},
             },
             id: people[0].id,
+            dietary_requirements: 'Low Cholesterol / Low Fat Meal',
           },
           "1": {
             food_choices_attributes: {
@@ -85,6 +86,7 @@ RSpec.describe RsvpFoodForm do
               "2": {food: dessert_b.id},
             },
             id: people[1].id,
+            dietary_requirements: '',
           },
         }
       end
@@ -96,10 +98,12 @@ RSpec.describe RsvpFoodForm do
 
       it 'updates peoples food choices based on params' do
         subject.save
+        people.each(&:reload)
 
         expect(people[0].starter_choice).to eql(starter_a)
         expect(people[0].main_choice).to eql(main_a)
         expect(people[0].dessert_choice).to eql(dessert_a)
+        expect(people[0].dietary_requirements).to eql('Low Cholesterol / Low Fat Meal')
 
         expect(people[1].starter_choice).to eql(starter_b)
         expect(people[1].main_choice).to eql(main_b)

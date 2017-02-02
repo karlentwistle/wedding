@@ -24,6 +24,8 @@ class RsvpFoodForm < RsvpBaseForm
         .flat_map(&:food_choices)
         .each(&:save!)
 
+      people.each(&:save!)
+
       true
     else
       false
@@ -48,6 +50,8 @@ class RsvpFoodForm < RsvpBaseForm
       ) do |person|
         person.id == person_attributes[:id].to_i
       end
+
+      person.dietary_requirements = person_attributes[:dietary_requirements]
 
       person_attributes.fetch(:food_choices_attributes, {})
         .values

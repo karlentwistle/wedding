@@ -23,12 +23,20 @@ module RsvpHelper
     click_button 'Next'
   end
 
-  def submit_food_choices(opts={})
-    opts.each do |person, food_choices|
-      within("div[data-id=\"#{person.id}\"]") do
-        food_choices.each do |label, food|
-          page.select(food.title, from: label)
-        end
+  def submit_food_choices(person, opts={})
+    food_opts = opts
+      .slice(:starter, :main, :dessert)
+      .select{|k,v| v.present?}
+
+    dietary_requirements = opts[:dietary_requirements]
+
+    within("div[data-id=\"#{person.id}\"]") do
+      food_opts.each do |label, food|
+        page.select(food.title, from: label.to_s.titlecase)
+      end
+
+      if dietary_requirements.present?
+        fill_in 'Dietary requirements', with: dietary_requirements
       end
     end
 
