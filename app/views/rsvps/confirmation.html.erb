@@ -1,4 +1,4 @@
-<main>
+<%= render layout: 'rsvp_step' do %>
   <ul>
     <% if @object.breakfast %>
       <% @object.people.each do |person| %>
@@ -17,4 +17,4 @@
       <% end %>
     <% end %>
   </ul>
-</main>
+<% end %>

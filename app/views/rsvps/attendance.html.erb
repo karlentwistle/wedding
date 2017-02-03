@@ -1,4 +1,4 @@
-<main>
+<%= render layout: 'rsvp_step' do %>
   <%= simple_form_for @object, url: wizard_path, method: :put do |f| %>
     <%= f.simple_fields_for :people do |person| %>
       <%= content_tag(:div, class: 'person', data: {id: person.object.id}) do %>
@@ -12,4 +12,4 @@
 
     <%= f.button :submit, 'Next' %>
   <% end %>
-</main>
+<% end %>

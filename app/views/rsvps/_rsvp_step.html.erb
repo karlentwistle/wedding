@@ -1,0 +1,10 @@
+<main>
+  <div class="breadcrumb">
+    <% steps.each do |step| %>
+      <span><%= link_to_if(past_step?(step), step.to_s.titleize, rsvp_path(step)) %></span>
+    <% end %>
+  </div>
+
+  <%= yield %>
+</main>
+

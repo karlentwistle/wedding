@@ -1,6 +1,6 @@
-<main>
+<%= render layout: 'rsvp_step' do %>
   <%= simple_form_for @object, url: wizard_path, method: :put do |f| %>
     <%= f.input :secret %>
     <%= f.button :submit, 'Next' %>
   <% end %>
-</main>
+<% end %>

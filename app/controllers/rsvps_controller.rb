@@ -24,6 +24,8 @@ class RsvpsController < ApplicationController
 
   private
 
+  helper_method :steps, :previous_step?
+
   def set_steps
     if rsvp_code.breakfast
       self.steps = [:enter_code, :attendance, :food, :confirmation]
