@@ -1,8 +1,21 @@
 .hero-image {
-  width:100%
+  width: 100%
 }
 
 main.homepage--main {
-  position: relative;
-  margin-top: -2em;
+  text-align: center;
+  padding: 0em 2em;
+
+  section {
+    padding-bottom: 1em;
+  }
+
+  li {
+    margin: 0.2em;
+  }
 }
+
+.direction--head {
+  text-decoration: underline;
+}
+

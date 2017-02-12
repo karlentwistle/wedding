@@ -1,17 +1,11 @@
 .centered-navigation {
-  $base-border-radius: 3px !default;
-  $dark-gray: #333 !default;
-  $large-screen: 53.75em !default;
-  $base-font-color: $dark-gray !default;
-  $centered-navigation-padding: 1em;
-  $centered-navigation-logo-height: 2em;
-  $centered-navigation-background: #E7F1EC;
-  $centered-navigation-color: transparentize($base-font-color, 0.3);
+  $base-font-color: $light-gray !default;
+  $centered-navigation-background: #4f3741;
+  $centered-navigation-color: transparentize(#d5cbce, 0.3);
   $centered-navigation-color-hover: $base-font-color;
   $centered-navigation-height: 60px;
   $centered-navigation-item-padding: 1em;
   $centered-navigation-submenu-padding: 1em;
-  $centered-navigation-submenu-width: 12em;
   $centered-navigation-item-nudge: 2.2em;
   $horizontal-bar-mode: $medium-screen + 1;
 
@@ -22,23 +16,6 @@
   z-index: 2;
 
   // Mobile view
-
-  .mobile-logo {
-    display: inline;
-    float: left;
-    max-height: $centered-navigation-height;
-    padding-left: $centered-navigation-padding;
-
-    img {
-      max-height: $centered-navigation-height;
-      opacity: 0.6;
-      padding: 0.8em 0;
-    }
-
-    @include media($horizontal-bar-mode) {
-      display: none;
-    }
-  }
 
   .centered-navigation-mobile-menu {
     color: $centered-navigation-color;
@@ -106,6 +83,7 @@
     text-align: right;
     width: 100%;
     z-index: 9999;
+    font-size: modular-scale(1);
 
     a {
       color: $centered-navigation-color;
@@ -129,48 +107,4 @@
       }
     }
   }
-
-  li.logo.nav-link {
-    display: none;
-    line-height: 0;
-
-    @include media($horizontal-bar-mode) {
-      display: inline;
-    }
-  }
-
-  .logo img {
-    margin-bottom: -$centered-navigation-logo-height / 3;
-    max-height: $centered-navigation-logo-height;
-    opacity: 0.6;
-  }
-
-  // Sub menus
-
-  li.more.nav-link {
-    padding-right: 0;
-
-    @include media($large-screen) {
-      padding-right: $centered-navigation-submenu-padding;
-    }
-
-    > ul > li:first-child a  {
-      padding-top: 1em;
-    }
-
-    a {
-      margin-right: $centered-navigation-submenu-padding;
-    }
-
-    > a {
-      padding-right: 0.6em;
-    }
-
-    > a::after {
-      @include position(absolute, auto -0.4em auto auto);
-      color: $centered-navigation-color;
-      content: "\25BE";
-    }
-  }
-
 }
