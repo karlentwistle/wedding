@@ -6,6 +6,10 @@ main.homepage--main {
   text-align: center;
   padding: 0em 2em;
 
+  p, li {
+    color: $light-gray;
+  }
+
   section {
     padding-bottom: 1em;
   }
