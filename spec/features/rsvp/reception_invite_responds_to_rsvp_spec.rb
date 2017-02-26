@@ -16,8 +16,6 @@ feature 'User responds to reception RSVP' do
 
     submit_code(rsvp_code)
 
-
-
     expect(page).to have_content person_a.full_name
     expect(page).to have_content person_b.full_name
     submit_attendance({

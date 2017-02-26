@@ -8,7 +8,7 @@ module RsvpHelper
   end
 
   def submit_code(secret=nil)
-    fill_in 'Secret', with: secret if secret
+    fill_in I18n.t('rsvp.step.label'), with: secret if secret
     click_button 'Next'
   end
 

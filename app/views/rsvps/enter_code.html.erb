@@ -1,6 +1,6 @@
 <%= render layout: 'rsvp_step' do %>
   <%= simple_form_for @object, url: wizard_path, method: :put do |f| %>
-    <%= f.input :secret, label: 'Enter code found on the back of your RSVP' %>
+    <%= f.input :secret, label: t('rsvp.step.label') %>
     <%= f.button :submit, 'Next' %>
   <% end %>
 <% end %>

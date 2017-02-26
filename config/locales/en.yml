@@ -20,4 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  rsvp:
+    step:
+      label: 'Enter code found on the back of your RSVP'

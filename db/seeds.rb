@@ -31,7 +31,7 @@ Food.create(
       sitting: 1
     },
     {
-      title: 'Vegetarian option',
+      title: 'Wild Mushroom, spinach & ricotta strudel served with a butternut squash puree, fine bean aubergine mash & Mushroom cream sauce',
       sitting: 1
     },
     {
