@@ -2,7 +2,7 @@
   <%= simple_form_for @object, url: wizard_path, method: :put do |f| %>
     <%= f.simple_fields_for :people do |person| %>
       <%= content_tag(:div, class: 'person', data: {id: person.object.id}) do %>
-        <%= person.object.full_name %>
+        <h3><%= person.object.full_name %></h3>
         <% if @object.breakfast %>
           <%= person.input :attending_breakfast %>
         <% end %>

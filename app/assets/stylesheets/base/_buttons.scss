@@ -1,6 +1,6 @@
 #{$all-buttons} {
   appearance: none;
-  background-color: $action-color;
+  background-color: $pink;
   border: 0;
   border-radius: $base-border-radius;
   color: #fff;
@@ -21,7 +21,7 @@
 
   &:hover,
   &:focus {
-    background-color: shade($action-color, 20%);
+    background-color: shade($pink, 20%);
     color: #fff;
   }
 

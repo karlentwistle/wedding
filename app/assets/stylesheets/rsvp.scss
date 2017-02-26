@@ -7,10 +7,10 @@
   $base-border-radius: 3px !default;
   $base-background-color: white !default;
   $base-spacing: 1.5em !default;
-  $action-color: #477DCA !default;
   $medium-gray: #999 !default;
   $light-gray: #DDD !default;
   $medium-screen: 40em !default;
+  $action-color: #477DCA !default;
   $breadcrumb-border-color: $base-border-color;
   $breadcrumb-border: 1px solid $breadcrumb-border-color;
   $breadcrumb-height: $base-spacing * 1.5;
@@ -18,7 +18,7 @@
   $breadcrumb-background: $base-background-color;
   $breadcrumb-inactive-hover-color: $breadcrumb-background;
   $breadcrumb-color: $medium-gray;
-  $breadcrumb-color-hover: $action-color;
+  $breadcrumb-color-hover: $pink;
   $breadcrumb-color-active: $breadcrumb-color;
 
   display: inline-block;
@@ -93,3 +93,8 @@
     }
   }
 }
+
+.rsvp--container input, label, select, textarea, span  {
+  font-size: 2em;
+}
+
