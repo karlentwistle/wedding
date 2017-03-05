@@ -20,6 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    errors:
+      models:
+        food_choice:
+          attributes:
+            food:
+              required: please make a selection
   rsvp:
     step:
-      label: 'Please enter the code found on the back of your invitation'
+      label: Please enter the code found on the back of your invitation
