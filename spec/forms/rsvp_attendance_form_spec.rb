@@ -20,6 +20,14 @@ RSpec.describe RsvpAttendanceForm do
     end
   end
 
+  describe '#reception' do
+    let(:rsvp_code) { create(:rsvp_code) }
+
+    it 'delegates to rsvp_code assosicated people' do
+      expect(subject.reception).to eql(rsvp_code.reception)
+    end
+  end
+
   describe '#people' do
     let(:people) { [create(:person), create(:person)] }
     let(:rsvp_code) { create(:rsvp_code) }

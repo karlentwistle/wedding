@@ -10,7 +10,7 @@ feature 'User responds to breakfast RSVP' do
               breakfast: false
               reception: false
             then redirected to confirmation page' do
-    person_a = create(:person)
+    person_a = create(:person, full_name: 'John Doe')
     rsvp_code.people << [person_a]
 
     submit_code(rsvp_code)
@@ -19,7 +19,13 @@ feature 'User responds to breakfast RSVP' do
       person_a => { breakfast: false, reception: false},
     })
 
-    expect(page).to have_content "#{person_a.full_name} - breakfast: false, reception: false"
+    with_person(person_a) do
+      expect(page).to have_content(
+        "John Doe
+        Ceremony: Can't make it
+        Reception: Can't make it"
+      )
+    end
   end
 
   scenario 'valid secret code (2 invitees)
@@ -30,7 +36,8 @@ feature 'User responds to breakfast RSVP' do
               breakfast: false
               reception: true
             then redirected to confirmation page' do
-    person_a, person_b = create(:person), create(:person)
+    person_a = create(:person, full_name: 'John Doe')
+    person_b = create(:person, full_name: 'Jane Doe')
     rsvp_code.people << [person_a, person_b]
 
     submit_code(rsvp_code)
@@ -41,8 +48,21 @@ feature 'User responds to breakfast RSVP' do
       person_b => { breakfast: false, reception: true},
     })
 
-    expect(page).to have_content "#{person_a.full_name} - breakfast: false, reception: false"
-    expect(page).to have_content "#{person_b.full_name} - breakfast: false, reception: true"
+    with_person(person_a) do
+      expect(page).to have_content(
+        "John Doe
+        Ceremony: Can't make it
+        Reception: Can't make it"
+      )
+    end
+
+    with_person(person_b) do
+      expect(page).to have_content(
+        "Jane Doe
+        Ceremony: Can't make it
+        Reception: Attending"
+      )
+    end
   end
 
   scenario 'valid secret code (2 invitees)
@@ -54,12 +74,18 @@ feature 'User responds to breakfast RSVP' do
               reception: true
             then select food choices for Person A only
             and redirected to confirmation page' do
-    person_a, person_b = create(:person), create(:person)
-    starter = create(:food, sitting: 0)
-    main = create(:food, sitting: 1)
-    dessert = create(:food, sitting: 2)
-
+    person_a = create(:person, full_name: 'John Doe')
+    person_b = create(:person, full_name: 'Jane Doe')
     rsvp_code.people << [person_a, person_b]
+
+    starter = create(:food, sitting: 0, title: 'Calamari')
+    other_starter = create(:food, sitting: 0)
+
+    main = create(:food, sitting: 1, title: 'Kokam')
+    other_main = create(:food, sitting: 1)
+
+    dessert = create(:food, sitting: 2, title: 'Nashi Pear')
+    other_dessert = create(:food, sitting: 2)
 
     submit_code(rsvp_code)
     expect(page).to have_content person_a.full_name
@@ -83,7 +109,24 @@ feature 'User responds to breakfast RSVP' do
       }
     )
 
-    expect(page).to have_content "#{person_a.full_name} - breakfast: true, reception: false"
-    expect(page).to have_content "#{person_b.full_name} - breakfast: false, reception: true"
+    with_person(person_a) do
+      expect(page).to have_content(
+        "John Doe
+        Ceremony: Attending
+        Starter: Calamari
+        Main: Kokam
+        Dessert: Nashi Pear
+        Dietary Requirements: Gluten Free Meal
+        Reception: Can't make it"
+      )
+    end
+
+    with_person(person_b) do
+      expect(page).to have_content(
+        "Jane Doe
+        Ceremony: Can't make it
+        Reception: Attending"
+      )
+    end
   end
 end

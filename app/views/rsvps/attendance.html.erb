@@ -4,9 +4,17 @@
       <%= content_tag(:div, class: 'person', data: {id: person.object.id}) do %>
         <h3><%= person.object.full_name %></h3>
         <% if @object.breakfast %>
-          <%= person.input :attending_breakfast %>
+          <%=
+            person.input :attending_breakfast,
+            wrapper_class: 'attendance-input'
+          %>
         <% end %>
-        <%= person.input :attending_reception %>
+        <% if @object.reception %>
+          <%=
+            person.input :attending_reception,
+            wrapper_class: 'attendance-input'
+          %>
+        <% end %>
       <% end %>
     <% end %>
 

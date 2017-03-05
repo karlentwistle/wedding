@@ -1,0 +1,45 @@
+.confirmation {
+  $base-spacing: 1.5em !default;
+  $dark-gray: #333 !default;
+  $base-font-color: $dark-gray !default;
+  $comment-color: $base-font-color;
+  $comment-detail-color: transparentize($comment-color, 0.5);
+  $comment-image-vert-alignment: top;
+
+  border-bottom: 1px solid transparentize($comment-color, 0.9);
+  display: table;
+  margin-bottom: $base-spacing;
+  padding-bottom: 1em;
+  width: 100%;
+
+  .food-choices {
+    margin-bottom: 0.5em;
+  }
+
+  .food-choice--label {
+    font-style: italic;
+    color: $comment-detail-color;
+  }
+
+  .event--label {
+    font-style: italic;
+    color: $comment-detail-color;
+  }
+
+  .food-choice {
+    font-size: 0.9em;
+    line-height: 1.5em;
+    margin-bottom: 0em;
+  }
+
+  .confirmation-content {
+    width: 100%;
+
+    p {
+      line-height: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+  }
+}
+

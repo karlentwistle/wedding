@@ -95,8 +95,36 @@
 }
 
 .rsvp--container {
-  input, label, select, textarea, span  {
-    font-size: 2em;
+  font-size: 1.5em;
+
+  @include media(min-width $medium-screen) {
+    @include span-columns(8);
+    @include shift(1);
+  }
+
+  @include media(min-width $large-screen) {
+    @include span-columns(6);
+    @include shift(2);
+  }
+
+  .error {
+    color: $pink;
+  }
+
+  .field_with_errors {
+    input, select {
+      border-color: $pink;
+    }
+  }
+
+  .secret-input {
+    width:10em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .attendance-input {
+    width:10em;
+    display: inline-block;
   }
 }
-

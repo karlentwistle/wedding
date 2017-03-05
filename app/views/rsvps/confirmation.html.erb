@@ -1,20 +1,62 @@
 <%= render layout: 'rsvp_step' do %>
-  <ul>
-    <% if @object.breakfast %>
-      <% @object.people.each do |person| %>
-        <li>
-          <%= person %> -
-          breakfast: <%= person.attending_breakfast %>,
-          reception: <%= person.attending_reception %>
-        </li>
-      <% end %>
-    <% else %>
-      <% @object.people.each do |person| %>
-        <li>
-          <%= person %> -
-          reception: <%= person.attending_reception %>
-        </li>
-      <% end %>
+  <% @object.people.each do |person| %>
+    <%= content_tag(:div, class: 'person', data: {id: person.id}) do %>
+      <div class="confirmation">
+        <div class="confirmation-content">
+          <h3><%= person %></h3>
+
+          <% if person.invited_to_breakfast? %>
+            <% if person.attending_breakfast %>
+              <p>
+                <span class="event--label">Ceremony:</span>
+                Attending
+              </p>
+
+              <ul class="food-choices">
+                <li class="food-choice">
+                  <span class="food-choice--label">Starter:</span>
+                  <%= person.starter_choice %>
+                </li>
+                <li class="food-choice">
+                  <span class="food-choice--label">Main:</span>
+                  <%= person.main_choice %>
+                </li>
+                <li class="food-choice">
+                  <span class="food-choice--label">Dessert:</span>
+                  <%= person.dessert_choice %>
+                </li>
+
+                <% if person.dietary_requirements.present? %>
+                  <li class="food-choice">
+                    Dietary Requirements: <%= person.dietary_requirements %>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p>
+                <span class="event--label">Ceremony:</span>
+                Can't make it
+              </p>
+            <% end %>
+          <% end %>
+
+          <% if person.attending_reception %>
+            <p>
+              <span class="event--label">Reception:</span>
+              Attending
+            </p>
+          <% else %>
+            <p>
+              <span class="event--label">Reception:</span>
+              Can't make it
+            </p>
+          <% end %>
+        </div>
+      </div>
     <% end %>
-  </ul>
+  <% end %>
+
+  <%= simple_form_for @object, url: wizard_path, method: :put do |f| %>
+    <%= f.button :submit, 'Next' %>
+  <% end %>
 <% end %>

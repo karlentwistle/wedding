@@ -18,6 +18,11 @@ class Person < ApplicationRecord
     end
   end
 
+  def invited_to_breakfast?
+    return false unless rsvp_code
+    rsvp_code.breakfast
+  end
+
   private
 
   def destroy_food_choices

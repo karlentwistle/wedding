@@ -11,7 +11,8 @@ feature 'User responds to reception RSVP' do
             Person B
               reception: true
             then redirected to confirmation page' do
-    person_a, person_b = create(:person), create(:person)
+    person_a = create(:person, full_name: 'John Doe')
+    person_b = create(:person, full_name: 'Jane Doe')
     rsvp_code.people << [person_a, person_b]
 
     submit_code(rsvp_code)
@@ -23,7 +24,18 @@ feature 'User responds to reception RSVP' do
       person_b => { reception: true},
     })
 
-    expect(page).to have_content "#{person_a.full_name} - reception: false"
-    expect(page).to have_content "#{person_b.full_name} - reception: true"
+    with_person(person_a) do
+      expect(page).to have_content(
+        "John Doe
+        Reception: Can't make it"
+      )
+    end
+
+    with_person(person_b) do
+      expect(page).to have_content(
+        "Jane Doe
+        Reception: Attending"
+      )
+    end
   end
 end

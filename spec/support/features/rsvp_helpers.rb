@@ -14,13 +14,19 @@ module RsvpHelper
 
   def submit_attendance(opts={})
     opts.each do |person, attending_choices|
-      within("div[data-id=\"#{person.id}\"]") do
+      with_person(person) do
         check 'Attending breakfast' if attending_choices.fetch(:breakfast, false)
         check 'Attending reception' if attending_choices.fetch(:reception, false)
       end
     end
 
     click_button 'Next'
+  end
+
+  def with_person(person)
+    within("div[data-id=\"#{person.id}\"]") do
+      yield
+    end
   end
 
   def submit_food_choices(person, opts={})

@@ -3,7 +3,7 @@ class RsvpAttendanceForm < RsvpBaseForm
   include ActiveModel::Conversion
 
   delegate :people, to: :rsvp_code, prefix: false, allow_nil: false
-  delegate :breakfast, to: :rsvp_code, prefix: false, allow_nil: false
+  delegate :breakfast, :reception, to: :rsvp_code, prefix: false, allow_nil: false
 
   validate :validate_submitted_people
 

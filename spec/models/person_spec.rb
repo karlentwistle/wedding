@@ -7,6 +7,31 @@ RSpec.describe Person, type: :model do
     expect(subject.valid?).to be true
   end
 
+  describe 'invited_to_breakfast' do
+    context 'no rsvp' do
+      it 'returns false' do
+        subject.rsvp_code = nil
+        expect(subject).not_to be_invited_to_breakfast
+      end
+    end
+
+    context 'rsvp' do
+      context 'includes breakfast' do
+        it 'returns true' do
+          subject.rsvp_code.breakfast = true
+          expect(subject).to be_invited_to_breakfast
+        end
+      end
+
+      context 'no breakfast' do
+        it 'returns false' do
+          subject.rsvp_code.breakfast = false
+          expect(subject).not_to be_invited_to_breakfast
+        end
+      end
+    end
+  end
+
   describe 'validations' do
     it 'is invalid without a full_name' do
       subject.full_name = ''
