@@ -19,7 +19,7 @@ Food.create(
       sitting: 0
     },
     {
-      title: 'Vegetarian terrine with a red onion and micro leaf salad served with sour dough bread',
+      title: 'Vegetarian terrine with a red onion and micro leaf salad served with sour dough bread (V)',
       sitting: 0
     },
     {
@@ -31,15 +31,15 @@ Food.create(
       sitting: 1
     },
     {
-      title: 'Wild Mushroom, spinach & ricotta strudel served with a butternut squash puree, fine bean aubergine mash & Mushroom cream sauce',
+      title: 'Wild Mushroom, spinach & ricotta strudel served with a butternut squash puree, fine bean aubergine mash & Mushroom cream sauce (V)',
       sitting: 1
     },
     {
-      title: 'Sticky toffee pudding with berries and hot toffee sauce',
+      title: 'Sticky toffee pudding with berries and hot toffee sauce (V)',
       sitting: 2
     },
     {
-      title: 'Vanilla panna cotta with a seasonal fruit garnish (GF)',
+      title: 'Vanilla panna cotta with a seasonal fruit garnish (GF) (V)',
       sitting: 2
     }
   ]
