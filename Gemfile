@@ -32,6 +32,7 @@ end
 group :development do
   gem 'listen', '~> 3.0.5'
   gem 'web-console', '>= 3.3.0'
+  gem 'guard-rspec', require: false
 end
 
 group :production do
