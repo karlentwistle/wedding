@@ -56,6 +56,4 @@ if (document.getElementById('venue_map')) {
       }
     };
   }()).init();
-
 }
-
