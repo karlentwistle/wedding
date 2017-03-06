@@ -1,6 +1,5 @@
 $(window).on("load resize",function(e) {
   var menuToggle = $("#js-centered-navigation-mobile-menu").unbind();
-  $("#js-centered-navigation-menu").removeClass("show");
 
   menuToggle.on("click", function(e) {
     e.preventDefault();
