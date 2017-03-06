@@ -11,7 +11,15 @@ class RsvpCode < ApplicationRecord
     secret
   end
 
-  def responded?
+  def close
+    update_attributes!(responded: true)
+  end
+
+  def respondable?
+    !responded
+  end
+
+  def confirmable?
     return false unless people.present?
 
     if breakfast?

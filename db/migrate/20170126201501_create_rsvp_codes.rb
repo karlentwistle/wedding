@@ -4,6 +4,7 @@ class CreateRsvpCodes < ActiveRecord::Migration[5.0]
       t.string :secret, null: false, index: true
       t.boolean :breakfast, null: false
       t.boolean :reception, null: false
+      t.boolean :confirmed, null: false, default: false
 
       t.timestamps
     end

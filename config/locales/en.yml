@@ -28,5 +28,7 @@ en:
             food:
               required: please make a selection
   rsvp:
+    button:
+      confirm: Confirm
     step:
       label: Please enter the code found on the back of your invitation

@@ -7,6 +7,16 @@ RSpec.describe RsvpCode, type: :model do
     expect(subject.valid?).to be true
   end
 
+  describe '#close' do
+    before { subject.save }
+
+    it 'sets responded to true' do
+      subject.close
+      subject.reload
+      expect(subject).to be_responded
+    end
+  end
+
   describe 'validations' do
     it 'is invalid without a secret' do
       subject.secret = ''
@@ -58,7 +68,7 @@ RSpec.describe RsvpCode, type: :model do
     end
   end
 
-  describe 'responded?' do
+  describe 'confirmable?' do
     context 'no people associated' do
       it { expect(subject.responded?).to be false }
     end
@@ -70,7 +80,7 @@ RSpec.describe RsvpCode, type: :model do
         before { subject.people << people }
 
         context 'no people responded' do
-          it { expect(subject.responded?).to be false }
+          it { expect(subject).not_to be_confirmable }
         end
 
         context 'some people responded' do
@@ -81,7 +91,7 @@ RSpec.describe RsvpCode, type: :model do
             )
           end
 
-          it { expect(subject.responded?).to be false }
+          it { expect(subject).not_to be_confirmable }
         end
 
         context 'all people responded' do
@@ -94,7 +104,7 @@ RSpec.describe RsvpCode, type: :model do
             end
           end
 
-          it { expect(subject.responded?).to be true }
+          it { expect(subject).to be_confirmable }
         end
       end
 
@@ -104,7 +114,7 @@ RSpec.describe RsvpCode, type: :model do
         before { subject.people << people }
 
         context 'no people responded' do
-          it { expect(subject.responded?).to be false }
+          it { expect(subject).not_to be_confirmable }
         end
 
         context 'some people responded' do
@@ -114,7 +124,7 @@ RSpec.describe RsvpCode, type: :model do
             )
           end
 
-          it { expect(subject.responded?).to be false }
+          it { expect(subject).not_to be_confirmable }
         end
 
         context 'all people responded' do
@@ -126,7 +136,7 @@ RSpec.describe RsvpCode, type: :model do
             end
           end
 
-          it { expect(subject.responded?).to be true }
+          it { expect(subject).to be_confirmable }
         end
       end
 

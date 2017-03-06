@@ -9,7 +9,8 @@ feature 'User responds to breakfast RSVP' do
             Person A
               breakfast: false
               reception: false
-            then redirected to confirmation page' do
+            then redirected to confirmation page
+            cannot alter their RSVP afterwards' do
     person_a = create(:person, full_name: 'John Doe')
     rsvp_code.people << [person_a]
 
@@ -19,6 +20,17 @@ feature 'User responds to breakfast RSVP' do
       person_a => { breakfast: false, reception: false},
     })
 
+    with_person(person_a) do
+      expect(page).to have_content(
+        "John Doe
+        Ceremony: Can't make it
+        Reception: Can't make it"
+      )
+    end
+
+    confirm_rsvp
+    visit_rsvp
+    submit_code(rsvp_code)
     with_person(person_a) do
       expect(page).to have_content(
         "John Doe

@@ -5,7 +5,7 @@ class RsvpFoodForm < RsvpBaseForm
   validate :validate_submitted_people
 
   def viewable?
-    rsvp_code.persisted? && people.any?
+    rsvp_code.persisted? && rsvp_code.respondable? && people.any?
   end
 
   def people
@@ -19,7 +19,7 @@ class RsvpFoodForm < RsvpBaseForm
   end
 
   def save
-    if valid?
+    if viewable? && valid?
       people
         .flat_map(&:food_choices)
         .each(&:save!)

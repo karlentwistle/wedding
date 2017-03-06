@@ -1,12 +1,15 @@
-<main class="container--main">
-  <div class="breadcrumb--container">
-    <div class="breadcrumb">
-      <% steps.each do |step| %>
-        <span><%= link_to_if(past_step?(step), step.to_s.titleize, rsvp_path(step)) %></span>
-      <% end %>
-    </div>
-  </div>
+<% breadcrumbs = true if local_assigns[:breadcrumbs].nil? %>
 
+<main class="container--main">
+  <% if breadcrumbs %>
+    <div class="breadcrumb--container">
+      <div class="breadcrumb">
+        <% steps.each do |step| %>
+          <span><%= link_to_if(past_step?(step), step.to_s.titleize, rsvp_path(step)) %></span>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 
   <div class="rsvp--container">
     <%= yield %>

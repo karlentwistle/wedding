@@ -26,4 +26,8 @@ class NullRsvpCode
   def persisted?
     false
   end
+
+  def responded?
+    false
+  end
 end

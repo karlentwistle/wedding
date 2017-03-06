@@ -48,6 +48,10 @@ module RsvpHelper
 
     click_button 'Next'
   end
+
+  def confirm_rsvp
+    click_button I18n.t('rsvp.button.confirm')
+  end
 end
 
 RSpec.configure do |config|

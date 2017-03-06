@@ -15,16 +15,15 @@ class RsvpCodeForm < RsvpBaseForm
     { rsvp_code_secret: secret }
   end
 
+  def finish_early?
+    RsvpCode.exists?(secret: secret, responded: true)
+  end
+
   private
 
   def rsvp_code_exists
-    if secret.present? && RsvpCode.exists?(secret: secret)
-      return true
-    elsif secret.present?
+    unless RsvpCode.exists?(secret: secret)
       errors.add('secret', 'unfortunately your code wasn\'t found')
-      false
-    else
-      false
     end
   end
 

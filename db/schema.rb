@@ -45,11 +45,12 @@ ActiveRecord::Schema.define(version: 20170129181132) do
   end
 
   create_table "rsvp_codes", force: :cascade do |t|
-    t.string   "secret",     null: false
-    t.boolean  "breakfast",  null: false
-    t.boolean  "reception",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "secret",                     null: false
+    t.boolean  "breakfast",                  null: false
+    t.boolean  "reception",                  null: false
+    t.boolean  "responded",  default: false, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["secret"], name: "index_rsvp_codes_on_secret", using: :btree
   end
 

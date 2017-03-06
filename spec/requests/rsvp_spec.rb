@@ -20,6 +20,27 @@ RSpec.describe "RSVP", :type => :request do
         expect(response).to have_http_status(:success)
       end
     end
+
+    context 'valid code' do
+      context 'not responded' do
+        it "redirects to attendance" do
+          put rsvp_path('enter_code'), params: {
+            rsvp_code_form: { secret: secret }
+          }
+          expect(response).to redirect_to(rsvp_path('attendance'))
+        end
+      end
+
+      context 'already responded to' do
+        before { rsvp_code.close }
+        it "redirects to confirmation" do
+          put rsvp_path('enter_code'), params: {
+            rsvp_code_form: { secret: secret }
+          }
+          expect(response).to redirect_to(rsvp_path('confirmation'))
+        end
+      end
+    end
   end
 
   describe 'attendance' do

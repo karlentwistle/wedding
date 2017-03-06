@@ -8,7 +8,7 @@ class RsvpAttendanceForm < RsvpBaseForm
   validate :validate_submitted_people
 
   def viewable?
-    rsvp_code.persisted?
+    rsvp_code.persisted? && rsvp_code.respondable?
   end
 
   def finish_early?
@@ -16,7 +16,7 @@ class RsvpAttendanceForm < RsvpBaseForm
   end
 
   def save
-    if valid?
+    if viewable? && valid?
       people.each(&:save!)
 
       true

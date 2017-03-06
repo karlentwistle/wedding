@@ -1,4 +1,4 @@
-<%= render layout: 'rsvp_step' do %>
+<%= render layout: 'rsvp_step', locals: { breadcrumbs: @object.respondable? } do %>
   <% @object.people.each do |person| %>
     <%= content_tag(:div, class: 'person', data: {id: person.id}) do %>
       <div class="confirmation">
@@ -56,7 +56,9 @@
     <% end %>
   <% end %>
 
-  <%= simple_form_for @object, url: wizard_path, method: :put do |f| %>
-    <%= f.button :submit, 'Next' %>
+  <% if @object.respondable? %>
+    <%= simple_form_for @object, url: wizard_path, method: :put do |f| %>
+      <%= f.button :submit, t('rsvp.button.confirm') %>
+    <% end %>
   <% end %>
 <% end %>
