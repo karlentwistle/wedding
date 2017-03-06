@@ -32,3 +32,5 @@ en:
       confirm: Confirm
     step:
       label: Please enter the code found on the back of your invitation
+    flash:
+      success: Thank you for responding your RSVP has been successfully submitted.

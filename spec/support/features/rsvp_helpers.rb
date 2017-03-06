@@ -51,6 +51,7 @@ module RsvpHelper
 
   def confirm_rsvp
     click_button I18n.t('rsvp.button.confirm')
+    expect(page).to have_content(I18n.t('rsvp.flash.success'))
   end
 end
 

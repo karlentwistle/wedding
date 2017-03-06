@@ -107,4 +107,10 @@ class RsvpsController < ApplicationController
       cookies[key] = value
     end
   end
+
+  def redirect_to_finish_wizard(options = {})
+    flash[:success] = t('rsvp.flash.success')
+    super
+  end
+
 end
