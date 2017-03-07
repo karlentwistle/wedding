@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170129181132) do
+ActiveRecord::Schema.define(version: 20170307223144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,4 +54,7 @@ ActiveRecord::Schema.define(version: 20170129181132) do
     t.index ["secret"], name: "index_rsvp_codes_on_secret", using: :btree
   end
 
+  add_foreign_key "food_choices", "foods", name: "food_choices_food_id_fk"
+  add_foreign_key "food_choices", "people", name: "food_choices_person_id_fk"
+  add_foreign_key "people", "rsvp_codes", name: "people_rsvp_code_id_fk"
 end
