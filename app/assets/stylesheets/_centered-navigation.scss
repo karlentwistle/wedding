@@ -32,7 +32,8 @@
     }
 
     &:focus,
-    &:hover {
+    &:hover,
+    &:active {
       color: $centered-navigation-color-hover;
     }
   }
@@ -92,7 +93,8 @@
       text-decoration: none;
 
       &:focus,
-      &:hover {
+      &:hover,
+      &:active {
         color: $centered-navigation-color-hover;
       }
     }
