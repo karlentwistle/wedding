@@ -7,6 +7,17 @@ RSpec.describe RsvpCode, type: :model do
     expect(subject.valid?).to be true
   end
 
+  describe '.find_by' do
+    context 'secret' do
+      it 'finds secrets case insensitively' do
+        create(:rsvp_code, secret: 'iLluMiNAti')
+        expect(
+          described_class.find_by(secret: 'illuminati')
+        ).to be_present
+      end
+    end
+  end
+
   describe '#close' do
     before { subject.save }
 

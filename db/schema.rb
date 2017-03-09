@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307223144) do
+ActiveRecord::Schema.define(version: 20170309191839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "citext"
 
   create_table "food_choices", force: :cascade do |t|
     t.integer  "person_id",  null: false
@@ -45,7 +46,7 @@ ActiveRecord::Schema.define(version: 20170307223144) do
   end
 
   create_table "rsvp_codes", force: :cascade do |t|
-    t.string   "secret",                     null: false
+    t.citext   "secret",                     null: false
     t.boolean  "breakfast",                  null: false
     t.boolean  "reception",                  null: false
     t.boolean  "responded",  default: false, null: false
