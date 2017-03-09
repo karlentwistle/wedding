@@ -109,4 +109,10 @@
       }
     }
   }
+
+  ul li.nav-link--current {
+    a {
+      color: $centered-navigation-color-hover;
+    }
+  }
 }

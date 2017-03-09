@@ -3,16 +3,12 @@
     <a href="javascript:void(0)" id="js-centered-navigation-mobile-menu" class="centered-navigation-mobile-menu">MENU</a>
     <nav role="navigation">
       <ul id="js-centered-navigation-menu" class="centered-navigation-menu">
-        <li class="nav-link"><%= link_to 'Information', root_path %></li>
-        <li class="nav-link">
-          <%= link_to 'RSVP', rsvps_path %>
-        </li>
+        <%= nav_link 'Information', root_path %>
+        <%= nav_link 'RSVP', rsvps_path, 'rsvps' %>
         <li class="nav-link">
           <a href="https://www.weddingshop.com/Buy/View/27841" target="_blank">Gifting</a>
         </li>
-        <li class="nav-link">
-          <%= link_to 'Photos', page_path('photos') %>
-        </li>
+        <%= nav_link 'Photos', page_path('photos') %>
       </ul>
     </nav>
   </div>
