@@ -27,7 +27,7 @@ class RsvpsController < ApplicationController
   helper_method :steps, :previous_step?
 
   def set_steps
-    if rsvp_code.breakfast
+    if rsvp_code.ceremony
       self.steps = [:enter_code, :attendance, :food, :confirmation]
     else
       self.steps = [:enter_code, :attendance, :confirmation]
@@ -58,7 +58,7 @@ class RsvpsController < ApplicationController
         params.require(:rsvp_attendance_form).permit(
           people_attributes: [
             :attending_reception,
-            :attending_breakfast,
+            :attending_ceremony,
             :id,
           ]
         )

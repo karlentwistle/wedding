@@ -17,11 +17,11 @@ RSpec.describe RsvpFoodForm do
       let(:rsvp_code) { create(:rsvp_code) }
       before { rsvp_code.people << people }
 
-      context 'and people attending_breakfast' do
+      context 'and people attending_ceremony' do
         let(:people) do
           [
-            create(:person, attending_breakfast: true),
-            create(:person, attending_breakfast: false)
+            create(:person, attending_ceremony: true),
+            create(:person, attending_ceremony: false)
           ]
         end
 
@@ -30,11 +30,11 @@ RSpec.describe RsvpFoodForm do
         end
       end
 
-      context 'no people attending_breakfast' do
+      context 'no people attending_ceremony' do
         let(:people) do
           [
             create(:person),
-            create(:person, attending_breakfast: false)
+            create(:person, attending_ceremony: false)
           ]
         end
 
@@ -46,9 +46,9 @@ RSpec.describe RsvpFoodForm do
   end
 
   describe '#people' do
-    it 'delegates to rsvp_code.people_attending_breakfast' do
+    it 'delegates to rsvp_code.people_attending_ceremony' do
       people = [Person.new]
-      allow(rsvp_code).to receive(:people_attending_breakfast).and_return(people)
+      allow(rsvp_code).to receive(:people_attending_ceremony).and_return(people)
       expect(subject.people).to eql(people)
     end
   end
@@ -63,8 +63,8 @@ RSpec.describe RsvpFoodForm do
       let(:dessert_b) { create(:food, sitting: 2) }
       let(:people) {
         [
-          create(:person, attending_breakfast: true),
-          create(:person, attending_breakfast: true)
+          create(:person, attending_ceremony: true),
+          create(:person, attending_ceremony: true)
         ]
       }
       let(:rsvp_code) { create(:rsvp_code) }
@@ -128,8 +128,8 @@ RSpec.describe RsvpFoodForm do
         context 'extra person' do
           let(:people) {
             [
-              create(:person, attending_breakfast: true),
-              create(:person, attending_breakfast: true)
+              create(:person, attending_ceremony: true),
+              create(:person, attending_ceremony: true)
             ]
           }
           let(:rsvp_code) { create(:rsvp_code) }
@@ -152,7 +152,7 @@ RSpec.describe RsvpFoodForm do
       context 'invalid food choices' do
         context 'choices left blank' do
           let(:starter) { create(:food, sitting: 0) }
-          let(:people) { [ create(:person, attending_breakfast: true) ] }
+          let(:people) { [ create(:person, attending_ceremony: true) ] }
           let(:rsvp_code) { create(:rsvp_code) }
           let(:people_attributes) do
             {

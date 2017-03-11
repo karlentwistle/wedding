@@ -40,8 +40,8 @@ RSpec.describe RsvpCode, type: :model do
       expect(duplicate_rsvp_code.save).to be false
     end
 
-    it 'is invalid without a true of false value for breakfast' do
-      subject.breakfast = ''
+    it 'is invalid without a true of false value for ceremony' do
+      subject.ceremony = ''
       expect(subject.save).to be false
     end
 
@@ -50,9 +50,9 @@ RSpec.describe RsvpCode, type: :model do
       expect(subject.save).to be false
     end
 
-    it 'is invalid if breakfast and reception are false' do
+    it 'is invalid if ceremony and reception are false' do
       subject.reception  = false
-      subject.breakfast  = false
+      subject.ceremony  = false
       expect(subject.save).to be false
     end
   end
@@ -85,8 +85,8 @@ RSpec.describe RsvpCode, type: :model do
     end
 
     context 'people associated' do
-      context 'breakfast' do
-        subject { create(:rsvp_code, breakfast: true, reception: true) }
+      context 'ceremony' do
+        subject { create(:rsvp_code, ceremony: true, reception: true) }
         let(:people) { [create(:person), create(:person)] }
         before { subject.people << people }
 
@@ -97,7 +97,7 @@ RSpec.describe RsvpCode, type: :model do
         context 'some people responded' do
           before do
             people.first.update_attributes(
-              attending_breakfast: true,
+              attending_ceremony: true,
               attending_reception: false
             )
           end
@@ -109,7 +109,7 @@ RSpec.describe RsvpCode, type: :model do
           before do
             people.each do |person|
               person.update_attributes(
-                attending_breakfast: true,
+                attending_ceremony: true,
                 attending_reception: false
               )
             end
@@ -120,7 +120,7 @@ RSpec.describe RsvpCode, type: :model do
       end
 
       context 'reception' do
-        subject { create(:rsvp_code, breakfast: false, reception: true) }
+        subject { create(:rsvp_code, ceremony: false, reception: true) }
         let(:people) { [create(:person), create(:person)] }
         before { subject.people << people }
 
@@ -154,10 +154,10 @@ RSpec.describe RsvpCode, type: :model do
     end
   end
 
-  describe '#people_attending_breakfast' do
-    let(:people_attending_breakfast) { [] }
-    let(:people_not_attending_breakfast) { [] }
-    let(:people) { people_attending_breakfast + people_not_attending_breakfast }
+  describe '#people_attending_ceremony' do
+    let(:people_attending_ceremony) { [] }
+    let(:people_not_attending_ceremony) { [] }
+    let(:people) { people_attending_ceremony + people_not_attending_ceremony }
     before do
       subject.save
       subject.people << people
@@ -165,36 +165,36 @@ RSpec.describe RsvpCode, type: :model do
 
     context 'no people associated' do
       it 'is empty' do
-        expect(subject.people_attending_breakfast).to be_empty
+        expect(subject.people_attending_ceremony).to be_empty
       end
     end
 
-    context 'no attending_breakfast people' do
-      let(:people_not_attending_breakfast) do
+    context 'no attending_ceremony people' do
+      let(:people_not_attending_ceremony) do
         [
-          create(:person, attending_breakfast: false),
-          create(:person, attending_breakfast: false),
+          create(:person, attending_ceremony: false),
+          create(:person, attending_ceremony: false),
         ]
       end
 
       it 'is empty' do
-        expect(subject.people_attending_breakfast).to be_empty
+        expect(subject.people_attending_ceremony).to be_empty
       end
     end
 
-    context 'some attending_breakfast people some not' do
-      let(:people_attending_breakfast) do
+    context 'some attending_ceremony people some not' do
+      let(:people_attending_ceremony) do
         [
-          create(:person, attending_breakfast: true),
-          create(:person, attending_breakfast: true),
+          create(:person, attending_ceremony: true),
+          create(:person, attending_ceremony: true),
         ]
       end
-      let(:people_not_attending_breakfast) do
-        [ create(:person, attending_breakfast: false) ]
+      let(:people_not_attending_ceremony) do
+        [ create(:person, attending_ceremony: false) ]
       end
 
-      it 'returns only attending_breakfast people' do
-        expect(subject.people_attending_breakfast).to match_array(people_attending_breakfast)
+      it 'returns only attending_ceremony people' do
+        expect(subject.people_attending_ceremony).to match_array(people_attending_ceremony)
       end
     end
   end

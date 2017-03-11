@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "RSVP", :type => :request do
-  let(:rsvp_code) { create(:rsvp_code, breakfast: false, reception: true) }
+  let(:rsvp_code) { create(:rsvp_code, ceremony: false, reception: true) }
   let(:secret) { rsvp_code.secret }
 
   describe 'root path' do
@@ -81,7 +81,7 @@ RSpec.describe "RSVP", :type => :request do
         }
       end
 
-      context 'rsvp_code not breakfast invite' do
+      context 'rsvp_code not ceremony invite' do
         it "raises ActionController::RoutingError" do
           expect {
             get rsvp_path('food')
@@ -89,8 +89,8 @@ RSpec.describe "RSVP", :type => :request do
         end
       end
 
-      context 'rsvp_code breakfast invite' do
-        let(:rsvp_code) { create(:rsvp_code, breakfast: true, reception: true) }
+      context 'rsvp_code ceremony invite' do
+        let(:rsvp_code) { create(:rsvp_code, ceremony: true, reception: true) }
 
         context 'attendance step not completed' do
           it "redirects to 'attendance'" do
@@ -100,7 +100,7 @@ RSpec.describe "RSVP", :type => :request do
         end
 
         context 'attendance step completed' do
-          let(:person) { create(:person, attending_breakfast: true, attending_reception: true) }
+          let(:person) { create(:person, attending_ceremony: true, attending_reception: true) }
           before { rsvp_code.people << person }
 
           it "renders 'food'" do
@@ -128,7 +128,7 @@ RSpec.describe "RSVP", :type => :request do
         }
       end
 
-      context 'attendance step not completed (not invited to breakfast)' do
+      context 'attendance step not completed (not invited to ceremony)' do
         let(:person) { create(:person) }
 
         it "redirects to 'attendance'" do
@@ -137,8 +137,8 @@ RSpec.describe "RSVP", :type => :request do
         end
       end
 
-      context 'attendance step not completed (are invited to breakfast)' do
-        let(:rsvp_code) { create(:rsvp_code, breakfast: true, reception: true) }
+      context 'attendance step not completed (are invited to ceremony)' do
+        let(:rsvp_code) { create(:rsvp_code, ceremony: true, reception: true) }
         let(:person) { create(:person) }
 
         it "redirects to 'attendance'" do
@@ -148,7 +148,7 @@ RSpec.describe "RSVP", :type => :request do
       end
 
       context 'attendance step completed' do
-        let(:person) { create(:person, attending_breakfast: true, attending_reception: true) }
+        let(:person) { create(:person, attending_ceremony: true, attending_reception: true) }
 
         it "renders 'confirmation'" do
           get rsvp_path('confirmation')

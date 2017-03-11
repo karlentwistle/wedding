@@ -7,26 +7,26 @@ RSpec.describe Person, type: :model do
     expect(subject.valid?).to be true
   end
 
-  describe 'invited_to_breakfast' do
+  describe 'invited_to_ceremony' do
     context 'no rsvp' do
       it 'returns false' do
         subject.rsvp_code = nil
-        expect(subject).not_to be_invited_to_breakfast
+        expect(subject).not_to be_invited_to_ceremony
       end
     end
 
     context 'rsvp' do
-      context 'includes breakfast' do
+      context 'includes ceremony' do
         it 'returns true' do
-          subject.rsvp_code.breakfast = true
-          expect(subject).to be_invited_to_breakfast
+          subject.rsvp_code.ceremony = true
+          expect(subject).to be_invited_to_ceremony
         end
       end
 
-      context 'no breakfast' do
+      context 'no ceremony' do
         it 'returns false' do
-          subject.rsvp_code.breakfast = false
-          expect(subject).not_to be_invited_to_breakfast
+          subject.rsvp_code.ceremony = false
+          expect(subject).not_to be_invited_to_ceremony
         end
       end
     end
@@ -44,13 +44,13 @@ RSpec.describe Person, type: :model do
     end
   end
 
-  describe 'attending_breakfast=' do
+  describe 'attending_ceremony=' do
     context 'person has associated food choices' do
-      context 'attending_breakfast set to false' do
+      context 'attending_ceremony set to false' do
         it 'destroy associated food choices' do
           create(:food_choice, person: subject)
 
-          subject.attending_breakfast = false
+          subject.attending_ceremony = false
           subject.save
           subject.reload
 

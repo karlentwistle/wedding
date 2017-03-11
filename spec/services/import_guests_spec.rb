@@ -12,7 +12,7 @@ RSpec.describe GuestImporter, type: :model do
 
         rsvp = RsvpCode.find_by(
           secret: 'HKE2',
-          breakfast: true,
+          ceremony: true,
           reception: true
         )
 
@@ -30,7 +30,7 @@ RSpec.describe GuestImporter, type: :model do
 
         rsvp = RsvpCode.find_by(
           secret: 'RT62',
-          breakfast: false,
+          ceremony: false,
           reception: true
         )
 
@@ -47,7 +47,7 @@ RSpec.describe GuestImporter, type: :model do
 
         rsvp = RsvpCode.find_by(
           secret: 'MCRR',
-          breakfast: true,
+          ceremony: true,
           reception: false
         )
 

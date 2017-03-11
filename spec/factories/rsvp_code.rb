@@ -2,6 +2,6 @@ FactoryGirl.define do
   factory :rsvp_code do
     secret { Faker::Code.imei }
     reception { true }
-    breakfast { [true, false].sample }
+    ceremony { [true, false].sample }
   end
 end

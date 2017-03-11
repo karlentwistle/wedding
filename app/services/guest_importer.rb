@@ -55,7 +55,7 @@ class GuestImporter
 
     def create_rsvp!
       @rsvp = RsvpCode.create!(
-        secret: code, breakfast: breakfast?, reception: reception?
+        secret: code, ceremony: ceremony?, reception: reception?
       )
     end
 
@@ -63,7 +63,7 @@ class GuestImporter
       row['Code']
     end
 
-    def breakfast?
+    def ceremony?
       row['Ceremony'] == 'Y'
     end
 

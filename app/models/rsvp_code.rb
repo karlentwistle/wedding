@@ -1,6 +1,6 @@
 class RsvpCode < ApplicationRecord
   validates :secret, presence: true, uniqueness: true
-  validates :breakfast, inclusion: { in: [true, false] }
+  validates :ceremony, inclusion: { in: [true, false] }
   validates :reception, inclusion: { in: [true, false] }
 
   validate :invited_to_something
@@ -22,9 +22,9 @@ class RsvpCode < ApplicationRecord
   def confirmable?
     return false unless people.present?
 
-    if breakfast?
+    if ceremony?
       people.where(
-        attending_breakfast: nil,
+        attending_ceremony: nil,
         attending_reception: nil
       ).empty?
     elsif reception?
@@ -34,14 +34,14 @@ class RsvpCode < ApplicationRecord
     end
   end
 
-  def people_attending_breakfast
-    people.where(attending_breakfast: true)
+  def people_attending_ceremony
+    people.where(attending_ceremony: true)
   end
 
   private
 
   def invited_to_something
-    unless breakfast || reception
+    unless ceremony || reception
       errors.add(:base, 'must invite people to something')
     end
   end

@@ -3,7 +3,7 @@ class NullRsvpCode
     ''
   end
 
-  def breakfast
+  def ceremony
     false
   end
 
@@ -19,7 +19,7 @@ class NullRsvpCode
     secret
   end
 
-  def people_attending_breakfast
+  def people_attending_ceremony
     []
   end
 

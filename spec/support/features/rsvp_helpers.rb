@@ -15,7 +15,7 @@ module RsvpHelper
   def submit_attendance(opts={})
     opts.each do |person, attending_choices|
       with_person(person) do
-        check 'Attending breakfast' if attending_choices.fetch(:breakfast, false)
+        check 'Attending ceremony' if attending_choices.fetch(:ceremony, false)
         check 'Attending reception' if attending_choices.fetch(:reception, false)
       end
     end

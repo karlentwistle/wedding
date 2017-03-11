@@ -9,7 +9,7 @@ class RsvpFoodForm < RsvpBaseForm
   end
 
   def people
-    @people ||= rsvp_code.people_attending_breakfast.tap do |people|
+    @people ||= rsvp_code.people_attending_ceremony.tap do |people|
       people.each do |person|
         Food.sittings.values.each do |sitting_id|
           person.food_choices.find_or_initialize_by(sitting: sitting_id)

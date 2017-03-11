@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309191839) do
+ActiveRecord::Schema.define(version: 20170311075635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20170309191839) do
 
   create_table "people", force: :cascade do |t|
     t.string   "full_name",            null: false
-    t.boolean  "attending_breakfast"
+    t.boolean  "attending_ceremony"
     t.boolean  "attending_reception"
     t.integer  "rsvp_code_id",         null: false
     t.string   "dietary_requirements"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20170309191839) do
 
   create_table "rsvp_codes", force: :cascade do |t|
     t.citext   "secret",                     null: false
-    t.boolean  "breakfast",                  null: false
+    t.boolean  "ceremony",                   null: false
     t.boolean  "reception",                  null: false
     t.boolean  "responded",  default: false, null: false
     t.datetime "created_at",                 null: false

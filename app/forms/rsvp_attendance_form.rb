@@ -3,7 +3,7 @@ class RsvpAttendanceForm < RsvpBaseForm
   include ActiveModel::Conversion
 
   delegate :people, to: :rsvp_code, prefix: false, allow_nil: false
-  delegate :breakfast, :reception, to: :rsvp_code, prefix: false, allow_nil: false
+  delegate :ceremony, :reception, to: :rsvp_code, prefix: false, allow_nil: false
 
   validate :validate_submitted_people
 
@@ -12,7 +12,7 @@ class RsvpAttendanceForm < RsvpBaseForm
   end
 
   def finish_early?
-    people.where(attending_breakfast: true).empty?
+    people.where(attending_ceremony: true).empty?
   end
 
   def save
@@ -42,7 +42,7 @@ class RsvpAttendanceForm < RsvpBaseForm
       end
 
       person.attending_reception = person_attributes[:attending_reception]
-      person.attending_breakfast = person_attributes[:attending_breakfast]
+      person.attending_ceremony = person_attributes[:attending_ceremony]
     end
   end
 

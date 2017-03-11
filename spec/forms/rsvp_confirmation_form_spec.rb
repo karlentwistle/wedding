@@ -14,9 +14,9 @@ RSpec.describe RsvpConfirmationForm do
     end
   end
 
-  describe '#breakfast' do
+  describe '#ceremony' do
     it 'delegates to rsvp_code' do
-      expect(subject.breakfast).to eql(rsvp_code.breakfast)
+      expect(subject.ceremony).to eql(rsvp_code.ceremony)
     end
   end
 

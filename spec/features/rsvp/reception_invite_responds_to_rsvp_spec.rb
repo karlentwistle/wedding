@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User responds to reception RSVP' do
   before { visit_rsvp }
 
-  let(:rsvp_code) { create(:rsvp_code, secret: '1234', breakfast: false, reception: true) }
+  let(:rsvp_code) { create(:rsvp_code, secret: '1234', ceremony: false, reception: true) }
 
   scenario 'valid secret code (2 invitees)
             Person A

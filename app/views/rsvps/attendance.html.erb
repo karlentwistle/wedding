@@ -3,9 +3,9 @@
     <%= f.simple_fields_for :people do |person| %>
       <%= content_tag(:div, class: 'person', data: {id: person.object.id}) do %>
         <h3><%= person.object.full_name %></h3>
-        <% if @object.breakfast %>
+        <% if @object.ceremony %>
           <%=
-            person.input :attending_breakfast,
+            person.input :attending_ceremony,
             wrapper_class: 'attendance-input'
           %>
         <% end %>

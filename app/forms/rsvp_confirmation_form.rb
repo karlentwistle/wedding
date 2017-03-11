@@ -3,7 +3,7 @@ class RsvpConfirmationForm < RsvpBaseForm
   include ActiveModel::Conversion
 
   delegate :people,
-           :breakfast,
+           :ceremony,
            :respondable?,
            to: :rsvp_code, prefix: false, allow_nil: false
 
