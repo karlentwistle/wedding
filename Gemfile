@@ -4,7 +4,6 @@ ruby '2.4.0'
 
 gem 'bourbon'
 gem 'coffee-rails', '~> 4.2'
-gem 'high_voltage', '~> 3.0.0'
 gem 'jquery-rails'
 gem 'neat'
 gem 'normalize-rails', '~> 3.0.0'

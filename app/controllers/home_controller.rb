@@ -1,0 +1,1 @@
+HomeController = Class.new(ApplicationController)

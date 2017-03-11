@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'home#index'
   get '/photos', to: 'photos#index'
 
   resources :rsvps,
