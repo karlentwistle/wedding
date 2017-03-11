@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/photos', to: 'photos#index'
+
   resources :rsvps,
     path: 'rsvp',
     constraints: { id: /enter_code|attendance|food|confirmation|wicked_finish/ }
