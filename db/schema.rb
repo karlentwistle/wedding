@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170311075635) do
+ActiveRecord::Schema.define(version: 20170318155917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,9 +49,10 @@ ActiveRecord::Schema.define(version: 20170311075635) do
     t.citext   "secret",                     null: false
     t.boolean  "ceremony",                   null: false
     t.boolean  "reception",                  null: false
-    t.boolean  "responded",  default: false, null: false
+    t.boolean  "confirmed",  default: false, null: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.boolean  "responded",  default: false
     t.index ["secret"], name: "index_rsvp_codes_on_secret", using: :btree
   end
 
