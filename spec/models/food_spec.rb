@@ -18,4 +18,26 @@ RSpec.describe Food, type: :model do
       expect(subject.save).to be false
     end
   end
+
+  describe '.for_sitting' do
+    let!(:starter) { create(:food, sitting: 0) }
+    let!(:main) { create(:food, sitting: 1) }
+    let!(:dessert) { create(:food, sitting: 2) }
+
+    context 'sitting starter' do
+      it 'returns only food for starter' do
+        expect(
+          Food.for_sitting(:starter)
+        ).to match_array([starter])
+      end
+    end
+
+    context 'sitting dessert' do
+      it 'returns only food for sitting dessert' do
+        expect(
+          Food.for_sitting(:dessert)
+        ).to match_array([dessert])
+      end
+    end
+  end
 end

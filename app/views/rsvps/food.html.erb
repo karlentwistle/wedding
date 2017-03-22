@@ -5,7 +5,10 @@
        <h3><%= person.object.full_name %></h3>
        <%= person.simple_fields_for :food_choices do |food_choice| %>
           <%= food_choice.input :food,
-            collection: food_for_sitting(food_choice.object.sitting),
+            collection: food_for_sitting(
+              food_choice.object.sitting,
+              person.object
+            ),
             include_blank: true,
             label: food_choice.object.sitting.humanize,
             selected: food_choice.object.food_id %>

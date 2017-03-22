@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318155917) do
+ActiveRecord::Schema.define(version: 20170318155918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,21 +27,23 @@ ActiveRecord::Schema.define(version: 20170318155917) do
   end
 
   create_table "foods", force: :cascade do |t|
-    t.string   "title",      null: false
-    t.integer  "sitting",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "title",                      null: false
+    t.integer  "sitting",                    null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "child",      default: false
     t.index ["sitting"], name: "index_foods_on_sitting", using: :btree
   end
 
   create_table "people", force: :cascade do |t|
-    t.string   "full_name",            null: false
+    t.string   "full_name",                            null: false
     t.boolean  "attending_ceremony"
     t.boolean  "attending_reception"
-    t.integer  "rsvp_code_id",         null: false
+    t.integer  "rsvp_code_id",                         null: false
     t.string   "dietary_requirements"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.boolean  "child",                default: false
     t.index ["rsvp_code_id"], name: "index_people_on_rsvp_code_id", using: :btree
   end
 

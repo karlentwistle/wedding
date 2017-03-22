@@ -36,7 +36,7 @@ module RsvpHelper
 
     dietary_requirements = opts[:dietary_requirements]
 
-    within("div[data-id=\"#{person.id}\"]") do
+    with_person(person) do
       food_opts.each do |label, food|
         page.select(food.title, from: label.to_s.titlecase)
       end

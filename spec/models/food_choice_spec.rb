@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe FoodChoice, type: :model do
-  subject { build(:food_choice) }
+  subject(:food_choice) { build(:food_choice) }
 
   it 'has a valid factory' do
     expect(subject.valid?).to be true
@@ -38,6 +38,26 @@ RSpec.describe FoodChoice, type: :model do
 
       subject = build(:food_choice, person: person, food: carrot_cake)
       expect(subject.save).to be false
+    end
+
+    it 'a child cannot pick adult food' do
+      child = create(:person, child: true)
+      adult_food = create(:food, child: false)
+
+      food_choice.food = adult_food
+      food_choice.person = child
+
+      expect(food_choice).to be_invalid
+    end
+
+    it 'a adult cannot pick child food' do
+      adult = create(:person, child: true)
+      child_food = create(:food, child: false)
+
+      food_choice.food = child_food
+      food_choice.person = adult
+
+      expect(food_choice).to be_invalid
     end
   end
 end

@@ -80,6 +80,88 @@ feature 'User responds to ceremony RSVP' do
   scenario 'valid secret code (2 invitees)
             Person A
               ceremony: true
+              reception: true
+            Child A
+              ceremony: true
+              reception: true' do
+    person_a = create(:person, full_name: 'John Doe')
+    child_a = create(:person, full_name: 'Little Johnny Doe', child: true)
+    rsvp_code.people << [person_a, child_a]
+    bootstrap_food!
+
+    submit_code(rsvp_code)
+    expect(page).to have_content person_a.full_name
+    expect(page).to have_content child_a.full_name
+    submit_attendance({
+      person_a => { ceremony: true, reception: true},
+      child_a => { ceremony: true, reception: true},
+    })
+
+    with_person(person_a) do
+      expect(options_for_select('Starter'))
+        .to match_array(food_options_for_select[:adult_starters])
+
+      expect(options_for_select('Main'))
+        .to match_array(food_options_for_select[:adult_mains])
+
+      expect(options_for_select('Dessert'))
+        .to match_array(food_options_for_select[:adult_desserts])
+    end
+
+    with_person(child_a) do
+      expect(options_for_select('Starter'))
+        .to match_array(food_options_for_select[:child_starters])
+
+      expect(options_for_select('Main'))
+        .to match_array(food_options_for_select[:child_mains])
+
+      expect(options_for_select('Dessert'))
+        .to match_array(food_options_for_select[:child_desserts])
+    end
+
+    submit_food_choices(
+      person_a, {
+        starter: food[:adult_starter],
+        main: food[:adult_main],
+        dessert: food[:adult_dessert]
+      },
+    )
+
+    submit_food_choices(
+      child_a, {
+        starter: food[:child_starter],
+        main: food[:child_main],
+        dessert: food[:child_dessert]
+      }
+    )
+
+    with_person(person_a) do
+      expect(page).to have_content(
+        "John Doe
+        Ceremony: Attending
+        Starter: #{food[:adult_starter]}
+        Main: #{food[:adult_main]}
+        Dessert: #{food[:adult_dessert]}
+        Reception: Attending"
+      )
+    end
+
+    with_person(child_a) do
+      expect(page).to have_content(
+        "Little Johnny Doe
+        Ceremony: Attending
+        Starter: #{food[:child_starter]}
+        Main: #{food[:child_main]}
+        Dessert: #{food[:child_dessert]}
+        Reception: Attending"
+      )
+    end
+
+  end
+
+  scenario 'valid secret code (2 invitees)
+            Person A
+              ceremony: true
               reception: false
             Person B
               ceremony: false
@@ -89,15 +171,7 @@ feature 'User responds to ceremony RSVP' do
     person_a = create(:person, full_name: 'John Doe')
     person_b = create(:person, full_name: 'Jane Doe')
     rsvp_code.people << [person_a, person_b]
-
-    starter = create(:food, sitting: 0, title: 'Calamari')
-    other_starter = create(:food, sitting: 0)
-
-    main = create(:food, sitting: 1, title: 'Kokam')
-    other_main = create(:food, sitting: 1)
-
-    dessert = create(:food, sitting: 2, title: 'Nashi Pear')
-    other_dessert = create(:food, sitting: 2)
+    bootstrap_food!
 
     submit_code(rsvp_code)
     expect(page).to have_content person_a.full_name
@@ -109,15 +183,15 @@ feature 'User responds to ceremony RSVP' do
 
     submit_food_choices(
       person_a, {
-        starter: starter,
+        starter: food[:adult_starter],
         dietary_requirements: 'Gluten Free Meal'
       }
     )
 
     submit_food_choices(
       person_a, {
-        main: main,
-        dessert: dessert
+        main: food[:adult_main],
+        dessert: food[:adult_dessert]
       }
     )
 
@@ -125,9 +199,9 @@ feature 'User responds to ceremony RSVP' do
       expect(page).to have_content(
         "John Doe
         Ceremony: Attending
-        Starter: Calamari
-        Main: Kokam
-        Dessert: Nashi Pear
+        Starter: #{food[:adult_starter]}
+        Main: #{food[:adult_main]}
+        Dessert: #{food[:adult_dessert]}
         Dietary Requirements: Gluten Free Meal
         Reception: Can't make it"
       )
@@ -140,5 +214,9 @@ feature 'User responds to ceremony RSVP' do
         Reception: Attending"
       )
     end
+  end
+
+  def options_for_select(label)
+    find(:select, label).all(:option).map(&:text)
   end
 end
