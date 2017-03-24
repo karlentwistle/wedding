@@ -1,6 +1,5 @@
 class Person < ApplicationRecord
   validates :full_name, presence: true
-  validates :rsvp_code, presence: true
 
   after_save :destroy_food_choices, unless: :attending_ceremony
 
@@ -29,6 +28,6 @@ class Person < ApplicationRecord
     food_choices.destroy_all if food_choices.any?
   end
 
-  belongs_to :rsvp_code
+  belongs_to :rsvp_code, optional: true
   has_many :foods, through: :food_choices
 end

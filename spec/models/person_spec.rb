@@ -18,6 +18,7 @@ RSpec.describe Person, type: :model do
     context 'rsvp' do
       context 'includes ceremony' do
         it 'returns true' do
+          subject.rsvp_code = build(:rsvp_code)
           subject.rsvp_code.ceremony = true
           expect(subject).to be_invited_to_ceremony
         end
@@ -25,6 +26,7 @@ RSpec.describe Person, type: :model do
 
       context 'no ceremony' do
         it 'returns false' do
+          subject.rsvp_code = build(:rsvp_code)
           subject.rsvp_code.ceremony = false
           expect(subject).not_to be_invited_to_ceremony
         end
@@ -35,11 +37,6 @@ RSpec.describe Person, type: :model do
   describe 'validations' do
     it 'is invalid without a full_name' do
       subject.full_name = ''
-      expect(subject.save).to be false
-    end
-
-    it 'is invalid without an rsvp_code' do
-      subject.rsvp_code = nil
       expect(subject.save).to be false
     end
   end
