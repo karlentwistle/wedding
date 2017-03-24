@@ -22,6 +22,11 @@ class Person < ApplicationRecord
     rsvp_code.ceremony
   end
 
+  def invited_to_reception?
+    return false unless rsvp_code
+    rsvp_code.reception
+  end
+
   private
 
   def destroy_food_choices

@@ -7,7 +7,7 @@ RSpec.describe Person, type: :model do
     expect(subject.valid?).to be true
   end
 
-  describe 'invited_to_ceremony' do
+  describe 'invited_to_ceremony?' do
     context 'no rsvp' do
       it 'returns false' do
         subject.rsvp_code = nil
@@ -29,6 +29,33 @@ RSpec.describe Person, type: :model do
           subject.rsvp_code = build(:rsvp_code)
           subject.rsvp_code.ceremony = false
           expect(subject).not_to be_invited_to_ceremony
+        end
+      end
+    end
+  end
+
+  describe 'invited_to_reception?' do
+    context 'no rsvp' do
+      it 'returns false' do
+        subject.rsvp_code = nil
+        expect(subject).not_to be_invited_to_reception
+      end
+    end
+
+    context 'rsvp' do
+      context 'includes reception' do
+        it 'returns true' do
+          subject.rsvp_code = build(:rsvp_code)
+          subject.rsvp_code.reception = true
+          expect(subject).to be_invited_to_reception
+        end
+      end
+
+      context 'no reception' do
+        it 'returns false' do
+          subject.rsvp_code = build(:rsvp_code)
+          subject.rsvp_code.reception = false
+          expect(subject).not_to be_invited_to_reception
         end
       end
     end

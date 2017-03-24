@@ -6,7 +6,7 @@
           <h3><%= person %></h3>
 
           <% if person.invited_to_ceremony? %>
-            <% if person.attending_ceremony %>
+            <% if person.attending_ceremony? %>
               <p>
                 <span class="event--label">Ceremony:</span>
                 Attending
@@ -40,16 +40,18 @@
             <% end %>
           <% end %>
 
-          <% if person.attending_reception %>
-            <p>
-              <span class="event--label">Reception:</span>
-              Attending
-            </p>
-          <% else %>
-            <p>
-              <span class="event--label">Reception:</span>
-              Can't make it
-            </p>
+          <% if person.invited_to_reception? %>
+            <% if person.attending_reception? %>
+              <p>
+                <span class="event--label">Reception:</span>
+                Attending
+              </p>
+            <% else %>
+              <p>
+                <span class="event--label">Reception:</span>
+                Can't make it
+              </p>
+            <% end %>
           <% end %>
         </div>
       </div>
