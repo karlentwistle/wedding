@@ -1,32 +1,86 @@
-Food.create(
+RsvpCode.create!(secret: 'ceremony', ceremony: true, reception: false).people << (
+  Person.create!(
+    [
+      { full_name: 'Thalia Gerrish' },
+      { full_name: 'Laquanda Weisz' },
+      { full_name: 'Delisa Flinn' },
+    ]
+  )
+)
+
+RsvpCode.create!(secret: 'reception', ceremony: false, reception: true).people << (
+  Person.create!(
+    [
+      { full_name: 'Emmanuel Blouin' },
+      { full_name: 'Khalilah Bierce' },
+      { full_name: 'Towanda Spector' },
+      { full_name: 'Delorse Ocheltree' },
+      { full_name: 'Nannie Lavallee' },
+    ]
+  )
+)
+
+RsvpCode.create!(secret: 'everything', ceremony: true, reception: true).people << (
+  Person.create!(
+    [
+      { full_name: 'Randi Stavros' },
+      { full_name: 'Tanesha Cruzado' },
+      { full_name: 'Truman Hemminger' },
+      { full_name: 'Yong Kobel', child: true },
+      { full_name: 'Everett Cousino', child: true },
+      { full_name: 'Sondra Dasilva', child: true },
+    ]
+  )
+)
+
+Food.create!(
   [
     {
-      title: 'Ham hock terrine with a red onion and micro leaf salad served with sour dough bread',
-      sitting: 0
+      title: 'Crispy squid with capers',
+      sitting: 0,
     },
     {
-      title: 'Vegetarian terrine with a red onion and micro leaf salad served with sour dough bread (V)',
-      sitting: 0
+      title: 'Lime & pepper chicken wraps',
+      sitting: 0,
     },
     {
-      title: 'Roasted Sea Bass, braised fennel, wild mushroom dauphinoise, Chantilly carrots and saffron cream (GF)',
-      sitting: 1
+      title: 'Roasted Corn and Pepper Salsa',
+      sitting: 0,
     },
     {
-      title: 'Lamb rump with butternut squash puree, fine bean aubergine mash & red current jus (GF)',
-      sitting: 1
+      title: 'Fried Ravioli',
+      sitting: 0,
+      child: true,
     },
     {
-      title: 'Wild Mushroom, spinach & ricotta strudel served with a butternut squash puree, fine bean aubergine mash & Mushroom cream sauce (V)',
-      sitting: 1
+      title: 'Rib-Eye, T-Bone, and Strip Steaks Cut Over',
+      sitting: 1,
     },
     {
-      title: 'Sticky toffee pudding with berries and hot toffee sauce (V)',
-      sitting: 2
+      title: 'Chilled Beet Soup',
+      sitting: 1,
     },
     {
-      title: 'Vanilla panna cotta with a seasonal fruit garnish (GF) (V)',
-      sitting: 2
-    }
+      title: 'Raymond Blanc\'s cassoulet',
+      sitting: 1,
+    },
+    {
+      title: 'Kid Friendly Salmon',
+      sitting: 1,
+      child: true,
+    },
+    {
+      title: 'Drunken Cherries with Orange Blossom Chenna',
+      sitting: 2,
+    },
+    {
+      title: 'Flan',
+      sitting: 2,
+    },
+    {
+      title: 'Nutella pizza',
+      sitting: 2,
+      child: true,
+    },
   ]
 )
