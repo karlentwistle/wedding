@@ -11,10 +11,6 @@ class RsvpAttendanceForm < RsvpBaseForm
     rsvp_code.persisted? && rsvp_code.respondable?
   end
 
-  def finish_early?
-    people.where(attending_ceremony: true).empty?
-  end
-
   def save
     if viewable? && valid?
       people.each(&:save!)

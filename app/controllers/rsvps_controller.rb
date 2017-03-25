@@ -8,6 +8,8 @@ class RsvpsController < ApplicationController
     @object = form_class.new(rsvp_code: rsvp_code)
     if @object.viewable?
       render_wizard
+    elsif @object.skip_to_end
+      redirect_to(rsvp_path(:confirmation))
     else
       redirect_to(rsvp_path(previous_step))
     end
@@ -84,7 +86,7 @@ class RsvpsController < ApplicationController
 
   def process_resource!(resource)
     if resource && resource.save
-      if resource.finish_early?
+      if resource.skip_to_end
         @skip_to ||= :confirmation
       else
         @skip_to ||= @next_step

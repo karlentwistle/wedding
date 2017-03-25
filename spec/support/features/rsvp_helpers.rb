@@ -7,6 +7,14 @@ module RsvpHelper
     end
   end
 
+  def visit_information
+    visit root_path
+
+    within '.centered-navigation' do
+      click_link 'Information'
+    end
+  end
+
   def submit_code(secret=nil)
     fill_in I18n.t('rsvp.step.label'), with: secret if secret
     click_button 'Next'

@@ -91,6 +91,8 @@ RSpec.describe "RSVP", :type => :request do
 
       context 'rsvp_code ceremony invite' do
         let(:rsvp_code) { create(:rsvp_code, ceremony: true, reception: true) }
+        let(:person) { create(:person) }
+        before { rsvp_code.people << person }
 
         context 'attendance step not completed' do
           it "redirects to 'attendance'" do

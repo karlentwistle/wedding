@@ -29,14 +29,18 @@ feature 'User responds to ceremony RSVP' do
     end
 
     confirm_rsvp
-    visit_rsvp
-    submit_code(rsvp_code)
-    with_person(person_a) do
-      expect(page).to have_content(
-        "John Doe
-        Ceremony: Can't make it
-        Reception: Can't make it"
-      )
+
+    using_session('another computer') do
+      visit_rsvp
+
+      submit_code(rsvp_code)
+      with_person(person_a) do
+        expect(page).to have_content(
+          "John Doe
+          Ceremony: Can't make it
+          Reception: Can't make it"
+        )
+      end
     end
   end
 

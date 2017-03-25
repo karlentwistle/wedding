@@ -11,6 +11,10 @@ class RsvpCode < ApplicationRecord
     secret
   end
 
+  def self.responded?(secret)
+    exists?(secret: secret, responded: true)
+  end
+
   def close
     update_attributes!(responded: true)
   end
@@ -32,6 +36,10 @@ class RsvpCode < ApplicationRecord
         attending_reception: nil
       ).empty?
     end
+  end
+
+  def people_all_rejected_ceremony
+    people.where(attending_ceremony: [nil, true]).empty?
   end
 
   def people_attending_ceremony

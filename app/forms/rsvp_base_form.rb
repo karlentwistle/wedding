@@ -15,7 +15,7 @@ class RsvpBaseForm
     true
   end
 
-  def finish_early?
+  def skip_to_end
     false
   end
 

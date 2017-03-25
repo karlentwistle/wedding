@@ -15,8 +15,12 @@ class RsvpCodeForm < RsvpBaseForm
     { rsvp_code_secret: secret }
   end
 
-  def finish_early?
-    RsvpCode.exists?(secret: secret, responded: true)
+  def viewable?
+    !rsvp_code.responded?
+  end
+
+  def skip_to_end
+    rsvp_code.responded? || RsvpCode.responded?(secret)
   end
 
   private
