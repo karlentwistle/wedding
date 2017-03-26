@@ -1,5 +1,5 @@
 class FoodChoice < ApplicationRecord
-  belongs_to :food
+  belongs_to :food, counter_cache: true
   belongs_to :person
 
   validates :sitting, uniqueness: { scope: [:person] }, presence: true
