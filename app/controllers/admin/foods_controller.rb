@@ -1,22 +1,13 @@
 module Admin
   class FoodsController < Admin::ApplicationController
+    private
 
-  # To customize the behavior of this controller,
-  # simply overwrite any of the RESTful actions. For example:
-  #
-  # def index
-  #   super
-  #   @resources = Food.
-  #     page(params[:page]).
-  #     per(10)
-  # end
-
-  # Define a custom finder by overriding the `find_resource` method:
-  # def find_resource(param)
-  #   Food.find_by!(slug: param)
-  # end
-
-  # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
-  # for more information
+    def order
+      if params[:order] && params[:direction]
+        super
+      else
+        @_order ||= Administrate::Order.new(:sitting, :asc)
+      end
+    end
   end
 end

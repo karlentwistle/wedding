@@ -14,6 +14,8 @@ class FoodDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     child: Field::Boolean,
+    people: Field::HasMany,
+    food_choices_count: Field::Number,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -24,14 +26,16 @@ class FoodDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :title,
     :sitting,
+    :food_choices_count,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :title,
     :sitting,
     :child,
+    :food_choices_count,
+    :people,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -46,7 +50,7 @@ class FoodDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how foods are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(food)
-  #   "Food ##{food.id}"
-  # end
+  def display_resource(food)
+    food.title
+  end
 end
