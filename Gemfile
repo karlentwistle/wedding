@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.4.0'
 
-gem 'bourbon'
+gem 'bourbon', '~> 4.2'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'neat'
@@ -15,9 +15,11 @@ gem 'sass-rails', '~> 5.0'
 gem 'simple_form', '~> 3.4'
 gem 'uglifier', '>= 1.3.0'
 gem 'wicked'
+gem 'administrate', '~> 0.4.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.5'
 end
 

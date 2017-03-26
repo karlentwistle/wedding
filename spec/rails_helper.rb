@@ -1,4 +1,6 @@
 ENV["RAILS_ENV"] = "test"
+ENV["ADMIN_NAME"] = "admin"
+ENV["ADMIN_PASSWORD"] = "password"
 
 require File.expand_path("../../config/environment", __FILE__)
 
