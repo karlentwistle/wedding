@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :foods
-    resources :food_choices
     resources :people
     resources :rsvp_codes
 
