@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 feature 'User responds to ceremony RSVP' do
-  before { visit_rsvp }
-
   let(:rsvp_code) { create(:rsvp_code, secret: '1234', ceremony: true, reception: true) }
 
   scenario 'valid secret code (1 invitee)
@@ -14,6 +12,7 @@ feature 'User responds to ceremony RSVP' do
     person_a = create(:person, full_name: 'John Doe')
     rsvp_code.people << [person_a]
 
+    visit_rsvp
     submit_code(rsvp_code)
     expect(page).to have_content person_a.full_name
     submit_attendance({
@@ -56,6 +55,7 @@ feature 'User responds to ceremony RSVP' do
     person_b = create(:person, full_name: 'Jane Doe')
     rsvp_code.people << [person_a, person_b]
 
+    visit_rsvp
     submit_code(rsvp_code)
     expect(page).to have_content person_a.full_name
     expect(page).to have_content person_b.full_name
@@ -93,6 +93,7 @@ feature 'User responds to ceremony RSVP' do
     rsvp_code.people << [person_a, child_a]
     bootstrap_food!
 
+    visit_rsvp
     submit_code(rsvp_code)
     expect(page).to have_content person_a.full_name
     expect(page).to have_content child_a.full_name
@@ -177,6 +178,7 @@ feature 'User responds to ceremony RSVP' do
     rsvp_code.people << [person_a, person_b]
     bootstrap_food!
 
+    visit_rsvp
     submit_code(rsvp_code)
     expect(page).to have_content person_a.full_name
     expect(page).to have_content person_b.full_name

@@ -6,18 +6,37 @@ module FoodHelper
 
   def food
     @_bootstrapped_food ||= {
-      adult_starter: create(:food, sitting: 0),
-      child_starter: create(:food, sitting: 0, child: true),
-      other_starter: create(:food, sitting: 0),
+      adult_starter: create_food(sitting: 'Starter'),
+      child_starter: create_food(sitting: 'Starter', child: true),
+      other_starter: create_food(sitting: 'Starter'),
 
-      adult_main: create(:food, sitting: 1),
-      child_main: create(:food, sitting: 1, child: true),
-      other_main: create(:food, sitting: 1),
+      adult_main: create_food(sitting: 'Main'),
+      child_main: create_food(sitting: 'Main', child: true),
+      other_main: create_food(sitting: 'Main'),
 
-      adult_dessert: create(:food, sitting: 2),
-      child_dessert: create(:food, sitting: 2, child: true),
-      other_dessert: create(:food, sitting: 2),
+      adult_dessert: create_food(sitting: 'Dessert'),
+      child_dessert: create_food(sitting: 'Dessert', child: true),
+      other_dessert: create_food(sitting: 'Dessert'),
     }
+  end
+
+  def create_food(title: nil, sitting: nil, child: false)
+    basic_auth_admin
+    visit '/admin/foods'
+    click_link 'New food'
+
+    random_food = build(:food)
+    title = title || random_food.title
+    sitting_name = sitting || random_food.sitting.humanize
+
+    fill_in 'Title', with: title || random_food.title
+    select sitting_name, from: 'Sitting'
+    check 'Child' if child
+
+    click_button 'Create Food'
+    expect(page).to have_text('Food was successfully created.')
+
+    Food.find_by!(title: title)
   end
 
   def food_options_for_select
