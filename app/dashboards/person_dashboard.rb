@@ -27,25 +27,13 @@ class PersonDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :food_choices,
-    :rsvp_code,
-    :foods,
-    :id,
+    :full_name,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :food_choices,
-    :rsvp_code,
-    :foods,
-    :id,
     :full_name,
-    :attending_ceremony,
-    :attending_reception,
-    :dietary_requirements,
-    :created_at,
-    :updated_at,
     :child,
   ].freeze
 
@@ -53,20 +41,14 @@ class PersonDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :food_choices,
-    :rsvp_code,
-    :foods,
     :full_name,
-    :attending_ceremony,
-    :attending_reception,
-    :dietary_requirements,
     :child,
   ].freeze
 
   # Overwrite this method to customize how people are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(person)
-  #   "Person ##{person.id}"
-  # end
+  def display_resource(person)
+    person.full_name
+  end
 end

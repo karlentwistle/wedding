@@ -25,24 +25,22 @@ class RsvpCodeDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :people,
-    :id,
     :secret,
+    :people,
     :ceremony,
+    :reception,
+    :responded,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :people,
-    :id,
     :secret,
     :ceremony,
     :reception,
     :confirmed,
-    :created_at,
-    :updated_at,
     :responded,
+    :people,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -53,14 +51,9 @@ class RsvpCodeDashboard < Administrate::BaseDashboard
     :secret,
     :ceremony,
     :reception,
-    :confirmed,
-    :responded,
   ].freeze
 
-  # Overwrite this method to customize how rsvp codes are displayed
-  # across all pages of the admin dashboard.
-  #
-  # def display_resource(rsvp_code)
-  #   "RsvpCode ##{rsvp_code.id}"
-  # end
+  def display_resource(rsvp_code)
+    "RsvpCode ##{rsvp_code.id}"
+  end
 end
