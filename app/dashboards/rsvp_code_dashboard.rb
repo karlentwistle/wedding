@@ -13,7 +13,6 @@ class RsvpCodeDashboard < Administrate::BaseDashboard
     secret: Field::String.with_options(searchable: false),
     ceremony: Field::Boolean,
     reception: Field::Boolean,
-    confirmed: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     responded: Field::Boolean,
@@ -38,7 +37,6 @@ class RsvpCodeDashboard < Administrate::BaseDashboard
     :secret,
     :ceremony,
     :reception,
-    :confirmed,
     :responded,
     :people,
   ].freeze
