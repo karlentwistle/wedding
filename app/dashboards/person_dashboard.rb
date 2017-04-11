@@ -10,7 +10,7 @@ class PersonDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     food_choices: Field::HasMany,
     rsvp_code: Field::BelongsTo,
-    foods: Field::HasMany,
+    foods: UnlimitedHasManyField,
     id: Field::Number,
     full_name: Field::String,
     attending_ceremony: Field::Boolean,
