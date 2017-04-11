@@ -8,7 +8,7 @@ class RsvpCodeDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    people: Field::HasMany,
+    people: UnlimitedHasManyField,
     id: Field::Number,
     secret: Field::String.with_options(searchable: false),
     ceremony: Field::Boolean,

@@ -14,7 +14,7 @@ class FoodDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     child: Field::Boolean,
-    people: Field::HasMany,
+    people: UnlimitedHasManyField,
     food_choices_count: Field::Number,
   }.freeze
 
