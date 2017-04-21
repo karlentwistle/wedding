@@ -1,0 +1,32 @@
+<% content_for(:title) do %>
+  <%= display_resource_name(page.resource_name) %>
+<% end %>
+
+<% content_for(:search) do %>
+  <% if show_search_bar %>
+    <%= render "search", search_term: search_term %>
+  <% end %>
+<% end %>
+
+<ul class="statistics">
+  <li>Total: <%= @statistics.person_count %></li>
+  <li>Ceremony: <%= @statistics.ceremony_count %></li>
+  <li>Reception: <%= @statistics.reception_count %></li>
+  <li>Responded: <%= @statistics.responded_count %></li>
+  <li>Awaiting Response: <%= @statistics.awaiting_response_count %></li>
+</ul>
+
+<header class="header">
+  <h1 class="header__heading" id="page-title"><%= content_for(:title) %></h1>
+  <div class="header__actions">
+    <%= link_to(
+      "New #{page.resource_name.titleize.downcase}",
+      [:new, namespace, page.resource_name],
+      class: "button",
+    ) %>
+  </div>
+</header>
+
+<%= render "collection", collection_presenter: page, resources: resources %>
+
+<%= paginate resources %>

@@ -1,5 +1,13 @@
 module Admin
   class PeopleController < Admin::ApplicationController
+
+    def index
+      @statistics = PersonStatistics.new
+      super
+    end
+
+    private
+
     class Order < Administrate::Order
       def apply(relation)
         if attribute == 'responded?'
@@ -15,8 +23,6 @@ module Admin
         Person.eager_load(:rsvp_code)
       end
     end
-
-    private
 
     def resource_resolver
       @_resource_resolver ||= ResourceResolver.new(controller_path)
