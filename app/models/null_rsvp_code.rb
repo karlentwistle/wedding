@@ -7,8 +7,16 @@ class NullRsvpCode
     false
   end
 
+  def ceremony?
+    ceremony
+  end
+
   def reception
-    true
+    false
+  end
+
+  def reception?
+    reception
   end
 
   def people

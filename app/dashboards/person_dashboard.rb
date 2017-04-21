@@ -19,6 +19,7 @@ class PersonDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     child: Field::Boolean,
+    responded?: Field::Boolean,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,14 +29,16 @@ class PersonDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :full_name,
+    :responded?,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :child,
-    :foods,
+    :responded?,
     :rsvp_code,
+    :foods,
+    :child,
   ].freeze
 
   # FORM_ATTRIBUTES

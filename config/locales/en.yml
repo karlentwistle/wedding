@@ -27,6 +27,10 @@ en:
           attributes:
             food:
               required: please make a selection
+  helpers:
+    label:
+      person:
+        responded?: 'responded'
   rsvp:
     button:
       confirm: Confirm

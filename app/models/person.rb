@@ -18,13 +18,21 @@ class Person < ApplicationRecord
   end
 
   def invited_to_ceremony?
-    return false unless rsvp_code
-    rsvp_code.ceremony
+    rsvp_code.ceremony?
   end
 
   def invited_to_reception?
-    return false unless rsvp_code
-    rsvp_code.reception
+    rsvp_code.reception?
+  end
+
+  def responded?
+    rsvp_code.responded?
+  end
+
+  belongs_to :rsvp_code, optional: true
+
+  def rsvp_code
+    super || NullRsvpCode.new
   end
 
   private
@@ -33,6 +41,5 @@ class Person < ApplicationRecord
     food_choices.destroy_all if food_choices.any?
   end
 
-  belongs_to :rsvp_code, optional: true
   has_many :foods, through: :food_choices
 end
