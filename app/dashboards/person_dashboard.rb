@@ -30,6 +30,8 @@ class PersonDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :full_name,
     :responded?,
+    :attending_ceremony,
+    :attending_reception,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
