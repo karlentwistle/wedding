@@ -7,7 +7,32 @@ RSpec.describe Person, type: :model do
     expect(subject.valid?).to be true
   end
 
-  describe 'invited_to_ceremony?' do
+  describe '#responded?' do
+    context 'no rsvp' do
+      it 'returns false' do
+        subject.rsvp_code = nil
+        expect(subject).not_to be_responded
+      end
+    end
+
+    context 'rsvp' do
+      context 'responded' do
+        it 'returns true' do
+          subject.rsvp_code = build(:rsvp_code, responded: true)
+          expect(subject).to be_responded
+        end
+      end
+
+      context 'hasnt responded' do
+        it 'returns false' do
+          subject.rsvp_code = build(:rsvp_code, responded: false)
+          expect(subject).not_to be_responded
+        end
+      end
+    end
+  end
+
+  describe '#invited_to_ceremony?' do
     context 'no rsvp' do
       it 'returns false' do
         subject.rsvp_code = nil
@@ -18,23 +43,21 @@ RSpec.describe Person, type: :model do
     context 'rsvp' do
       context 'includes ceremony' do
         it 'returns true' do
-          subject.rsvp_code = build(:rsvp_code)
-          subject.rsvp_code.ceremony = true
+          subject.rsvp_code = build(:rsvp_code, ceremony: true)
           expect(subject).to be_invited_to_ceremony
         end
       end
 
       context 'no ceremony' do
         it 'returns false' do
-          subject.rsvp_code = build(:rsvp_code)
-          subject.rsvp_code.ceremony = false
+          subject.rsvp_code = build(:rsvp_code, ceremony: false)
           expect(subject).not_to be_invited_to_ceremony
         end
       end
     end
   end
 
-  describe 'invited_to_reception?' do
+  describe '#invited_to_reception?' do
     context 'no rsvp' do
       it 'returns false' do
         subject.rsvp_code = nil
@@ -45,16 +68,14 @@ RSpec.describe Person, type: :model do
     context 'rsvp' do
       context 'includes reception' do
         it 'returns true' do
-          subject.rsvp_code = build(:rsvp_code)
-          subject.rsvp_code.reception = true
+          subject.rsvp_code = build(:rsvp_code, reception: true)
           expect(subject).to be_invited_to_reception
         end
       end
 
       context 'no reception' do
         it 'returns false' do
-          subject.rsvp_code = build(:rsvp_code)
-          subject.rsvp_code.reception = false
+          subject.rsvp_code = build(:rsvp_code, reception: false)
           expect(subject).not_to be_invited_to_reception
         end
       end
@@ -68,7 +89,7 @@ RSpec.describe Person, type: :model do
     end
   end
 
-  describe 'attending_ceremony=' do
+  describe '#attending_ceremony=' do
     context 'person has associated food choices' do
       context 'attending_ceremony set to false' do
         it 'destroy associated food choices' do
@@ -103,7 +124,7 @@ RSpec.describe Person, type: :model do
     end
   end
 
-  describe 'food_choices_attributes=' do
+  describe '#food_choices_attributes=' do
     it 'responds to food_choices_attributes=
       (required by rsvp food form helper)' do
       expect(subject).to respond_to(:food_choices_attributes=)

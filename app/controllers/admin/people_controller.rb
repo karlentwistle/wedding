@@ -1,21 +1,29 @@
 module Admin
   class PeopleController < Admin::ApplicationController
-    # To customize the behavior of this controller,
-    # simply overwrite any of the RESTful actions. For example:
-    #
-    # def index
-    #   super
-    #   @resources = Person.
-    #     page(params[:page]).
-    #     per(10)
-    # end
+    class Order < Administrate::Order
+      def apply(relation)
+        if attribute == 'responded?'
+          relation.merge(RsvpCode.order(responded: direction))
+        else
+          super
+        end
+      end
+    end
 
-    # Define a custom finder by overriding the `find_resource` method:
-    # def find_resource(param)
-    #   Person.find_by!(slug: param)
-    # end
+    class ResourceResolver < Administrate::ResourceResolver
+      def resource_class
+        Person.eager_load(:rsvp_code)
+      end
+    end
 
-    # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
-    # for more information
+    private
+
+    def resource_resolver
+      @_resource_resolver ||= ResourceResolver.new(controller_path)
+    end
+
+    def order
+      @_order ||= Order.new(params[:order], params[:direction])
+    end
   end
 end
