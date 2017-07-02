@@ -3,6 +3,8 @@ class Person < ApplicationRecord
 
   after_save :destroy_food_choices, unless: :attending_ceremony
 
+  scope :attending_ceremony, -> { where(attending_ceremony: true) }
+
   def to_s
     full_name
   end

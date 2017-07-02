@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :foods
-    resources :people
+    resources :people do
+      collection do
+        get :export
+      end
+    end
     resources :rsvp_codes
 
     root to: "foods#index"
