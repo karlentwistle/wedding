@@ -6,6 +6,10 @@ module Admin
       super
     end
 
+    def export
+      send_data CeremonyExport.new.perform, filename: "people-#{Date.today}.csv"
+    end
+
     private
 
     class Order < Administrate::Order
