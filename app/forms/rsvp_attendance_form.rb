@@ -5,8 +5,6 @@ class RsvpAttendanceForm < RsvpBaseForm
   delegate :people, to: :rsvp_code, prefix: false, allow_nil: false
   delegate :ceremony, :reception, to: :rsvp_code, prefix: false, allow_nil: false
 
-  validate :validate_submitted_people
-
   def viewable?
     rsvp_code.persisted? && rsvp_code.respondable?
   end
@@ -39,24 +37,6 @@ class RsvpAttendanceForm < RsvpBaseForm
 
       person.attending_reception = person_attributes[:attending_reception]
       person.attending_ceremony = person_attributes[:attending_ceremony]
-    end
-  end
-
-  private
-
-  def submitted_people
-    people_ids = params
-      .fetch(:people_attributes, {})
-      .values
-      .map {|p| p[:id]}
-      .compact
-
-    people.where(id: people_ids)
-  end
-
-  def validate_submitted_people
-    if submitted_people.count < people.count
-      errors.add(:base, 'a person is missing')
     end
   end
 end
