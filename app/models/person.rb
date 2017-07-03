@@ -11,8 +11,6 @@ class Person < ApplicationRecord
 
   has_many :food_choices, -> { order(:sitting) }
 
-  def food_choices_attributes=(*args); end
-
   Food.sittings.keys.each do |sitting|
     define_method("#{sitting}_choice") do
       foods.find_by(sitting: sitting)
