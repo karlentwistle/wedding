@@ -25,10 +25,11 @@ class RsvpAttendanceForm < RsvpBaseForm
 
   def people_attributes=(people_attributes)
     people_attributes.to_h.each do |_, person_attributes|
-      person = find_person_or_raise(person_attributes[:id])
-
-      person.attending_reception = person_attributes[:attending_reception]
-      person.attending_ceremony = person_attributes[:attending_ceremony]
+      find_person_or_raise(person_attributes[:id])
+        .attributes = {
+          attending_reception: person_attributes[:attending_reception],
+          attending_ceremony: person_attributes[:attending_ceremony]
+        }
     end
   end
 
