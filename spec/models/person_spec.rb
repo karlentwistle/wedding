@@ -123,11 +123,4 @@ RSpec.describe Person, type: :model do
       end
     end
   end
-
-  describe '#food_choices_attributes=' do
-    it 'responds to food_choices_attributes=
-      (required by rsvp food form helper)' do
-      expect(subject).to respond_to(:food_choices_attributes=)
-    end
-  end
 end

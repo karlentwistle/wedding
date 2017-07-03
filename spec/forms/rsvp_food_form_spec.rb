@@ -46,10 +46,16 @@ RSpec.describe RsvpFoodForm do
   end
 
   describe '#people' do
-    it 'delegates to rsvp_code.people_attending_ceremony' do
-      people = [Person.new]
+    it 'returns people wrapped in person form objects' do
+      person_a = Person.new
+      person_b = Person.new
+      people = [person_a, person_b]
       allow(rsvp_code).to receive(:people_attending_ceremony).and_return(people)
-      expect(subject.people).to eql(people)
+
+      expect(subject.people).to match_array([
+        PersonFoodForm.new(person_a),
+        PersonFoodForm.new(person_b),
+      ])
     end
   end
 

@@ -18,9 +18,9 @@ RSpec.describe RsvpBaseForm do
     end
   end
 
-  describe '#skip_to_end' do
+  describe '#skip_to_end?' do
     it 'returns false' do
-      expect(subject.skip_to_end).to be false
+      expect(subject.skip_to_end?).to be false
     end
   end
 

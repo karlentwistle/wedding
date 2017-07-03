@@ -85,21 +85,6 @@ RSpec.describe RsvpAttendanceForm do
           end
         end
 
-        context 'person missing' do
-          let(:people) { [create(:person), create(:person)] }
-          let(:rsvp_code) { create(:rsvp_code) }
-          before { rsvp_code.people << people.sample }
-
-          it 'returns false' do
-            expect(subject.save).to be false
-          end
-
-          it 'appends error to base' do
-            subject.save
-            expect(subject.errors[:base]).to include('a person is missing')
-          end
-        end
-
         context 'extra person' do
           let(:people) { [create(:person), create(:person)] }
           let(:rsvp_code) { create(:rsvp_code) }

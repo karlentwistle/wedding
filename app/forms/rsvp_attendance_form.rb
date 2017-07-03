@@ -1,11 +1,13 @@
+require_relative '../../lib/fake_collection_proxy'
+
 class RsvpAttendanceForm < RsvpBaseForm
   include ActiveModel::Validations
   include ActiveModel::Conversion
 
+  validate :validate_people
+
   delegate :people, to: :rsvp_code, prefix: false, allow_nil: false
   delegate :ceremony, :reception, to: :rsvp_code, prefix: false, allow_nil: false
-
-  validate :validate_submitted_people
 
   def viewable?
     rsvp_code.persisted? && rsvp_code.respondable?
@@ -21,42 +23,27 @@ class RsvpAttendanceForm < RsvpBaseForm
     end
   end
 
-  def valid?
-    super && all_people_valid?
-  end
-
-  def all_people_valid?
-    people.map(&:valid?).all? {|p| p == true}
-  end
-
   def people_attributes=(people_attributes)
     people_attributes.to_h.each do |_, person_attributes|
-      person = people.find(
-        -> { raise ActiveRecord::RecordNotFound }
-      ) do |person|
-        person.id == person_attributes[:id].to_i
-      end
-
-      person.attending_reception = person_attributes[:attending_reception]
-      person.attending_ceremony = person_attributes[:attending_ceremony]
+      find_person_or_raise(person_attributes[:id])
+        .attributes = {
+          attending_reception: person_attributes[:attending_reception],
+          attending_ceremony: person_attributes[:attending_ceremony]
+        }
     end
   end
 
   private
 
-  def submitted_people
-    people_ids = params
-      .fetch(:people_attributes, {})
-      .values
-      .map {|p| p[:id]}
-      .compact
-
-    people.where(id: people_ids)
+  def find_person_or_raise(id)
+    FakeCollectionProxy[*people].find do |person|
+      person.id == id.to_i
+    end
   end
 
-  def validate_submitted_people
-    if submitted_people.count < people.count
-      errors.add(:base, 'a person is missing')
+  def validate_people
+    unless people.map(&:valid?).all?
+      error.add(:base, 'invalid person')
     end
   end
 end
