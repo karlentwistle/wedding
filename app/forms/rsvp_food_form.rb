@@ -8,7 +8,7 @@ class RsvpFoodForm < RsvpBaseForm
     rsvp_code.persisted? && rsvp_code.respondable? && people.any?
   end
 
-  def skip_to_end
+  def skip_to_end?
     rsvp_code.people_all_rejected_ceremony
   end
 

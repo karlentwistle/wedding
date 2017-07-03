@@ -19,7 +19,7 @@ class RsvpCodeForm < RsvpBaseForm
     !rsvp_code.responded?
   end
 
-  def skip_to_end
+  def skip_to_end?
     rsvp_code.responded? || RsvpCode.responded?(secret)
   end
 

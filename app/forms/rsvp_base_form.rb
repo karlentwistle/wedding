@@ -15,7 +15,7 @@ class RsvpBaseForm
     true
   end
 
-  def skip_to_end
+  def skip_to_end?
     false
   end
 
