@@ -1,3 +1,5 @@
+require_relative '../../lib/fake_collection_proxy'
+
 class RsvpFoodForm < RsvpBaseForm
   include ActiveModel::Validations
   include ActiveModel::Conversion
@@ -32,12 +34,16 @@ class RsvpFoodForm < RsvpBaseForm
 
   def people_attributes=(attributes)
     attributes.to_h.each do |_, person_attributes|
-      person = people.find(
-        -> { raise ActiveRecord::RecordNotFound }
-      ) do |person|
-        person.id == person_attributes[:id].to_i
-      end
-      person.update(person_attributes)
+      find_person_or_raise(person_attributes[:id])
+        .update(person_attributes)
+    end
+  end
+
+  private
+
+  def find_person_or_raise(id)
+    FakeCollectionProxy[*people].find do |person|
+      person.id == id.to_i
     end
   end
 

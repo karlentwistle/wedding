@@ -1,3 +1,5 @@
+require_relative '../../lib/fake_collection_proxy'
+
 class RsvpAttendanceForm < RsvpBaseForm
   include ActiveModel::Validations
   include ActiveModel::Conversion
@@ -23,11 +25,7 @@ class RsvpAttendanceForm < RsvpBaseForm
 
   def people_attributes=(people_attributes)
     people_attributes.to_h.each do |_, person_attributes|
-      person = people.find(
-        -> { raise ActiveRecord::RecordNotFound }
-      ) do |person|
-        person.id == person_attributes[:id].to_i
-      end
+      person = find_person_or_raise(person_attributes[:id])
 
       person.attending_reception = person_attributes[:attending_reception]
       person.attending_ceremony = person_attributes[:attending_ceremony]
@@ -35,6 +33,12 @@ class RsvpAttendanceForm < RsvpBaseForm
   end
 
   private
+
+  def find_person_or_raise(id)
+    FakeCollectionProxy[*people].find do |person|
+      person.id == id.to_i
+    end
+  end
 
   def validate_people
     unless people.map(&:valid?).all?
