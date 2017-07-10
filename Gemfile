@@ -14,7 +14,7 @@ gem 'refills'
 gem 'sass-rails', '~> 5.0'
 gem 'simple_form', '~> 3.5'
 gem 'uglifier', '>= 1.3.0'
-gem 'wicked'
+gem 'wicked', '~> 1.3'
 gem 'administrate', '~> 0.4.0'
 
 group :development, :test do

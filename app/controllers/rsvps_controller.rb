@@ -110,7 +110,7 @@ class RsvpsController < ApplicationController
     end
   end
 
-  def redirect_to_finish_wizard(options = {})
+  def redirect_to_finish_wizard(*args)
     flash[:success] = t('rsvp.flash.success')
     super
   end
