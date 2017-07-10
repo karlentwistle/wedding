@@ -225,9 +225,9 @@ GEM
       tilt (>= 1.1, < 3)
     selectize-rails (0.12.4)
     shellany (0.0.1)
-    simple_form (3.4.0)
-      actionpack (> 4, < 5.1)
-      activemodel (> 4, < 5.1)
+    simple_form (3.5.0)
+      actionpack (> 4, < 5.2)
+      activemodel (> 4, < 5.2)
     slop (3.6.0)
     sprockets (3.7.1)
       concurrent-ruby (~> 1.0)
@@ -282,7 +282,7 @@ DEPENDENCIES
   refills
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
-  simple_form (~> 3.4)
+  simple_form (~> 3.5)
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
   wicked
