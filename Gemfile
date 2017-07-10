@@ -15,7 +15,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'simple_form', '~> 3.5'
 gem 'uglifier', '>= 1.3.0'
 gem 'wicked', '~> 1.3'
-gem 'administrate', '~> 0.4.0'
+gem 'administrate', git: 'https://github.com/thoughtbot/administrate'
 
 group :development, :test do
   gem 'byebug', platform: :mri
