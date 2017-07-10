@@ -19,7 +19,7 @@ gem 'administrate', '~> 0.4.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', '~> 2.2'
   gem 'rspec-rails', '~> 3.5'
 end
 
