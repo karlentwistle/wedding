@@ -20,7 +20,7 @@ gem 'administrate', git: 'https://github.com/thoughtbot/administrate'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'dotenv-rails', '~> 2.2'
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails', '~> 3.6'
 end
 
 group :test do
