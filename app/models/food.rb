@@ -3,6 +3,7 @@ class Food < ApplicationRecord
   validates :sitting, presence: true
   enum sitting: [:starter, :main, :dessert]
 
+  has_many :food_choices
   has_many :people, through: :food_choices
 
   def self.for_sitting_and_person(sitting, person)
@@ -15,6 +16,5 @@ class Food < ApplicationRecord
 
   private
 
-  has_many :food_choices
   scope :for_sitting, -> (sitting) { where(sitting: sitting) }
 end
