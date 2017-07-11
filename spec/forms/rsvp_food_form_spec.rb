@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RsvpFoodForm do
   let(:people_attributes) { {} }
-  let(:rsvp_code) { NullRsvpCode.new }
+  let(:rsvp_code) { RsvpCode.new }
   let(:params) { { people_attributes: people_attributes } }
   let(:subject) { described_class.new(rsvp_code: rsvp_code, params: params) }
 

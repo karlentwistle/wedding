@@ -32,7 +32,7 @@ class Person < ApplicationRecord
   belongs_to :rsvp_code, optional: true
 
   def rsvp_code
-    super || NullRsvpCode.new
+    super || RsvpCode.new
   end
 
   private

@@ -12,6 +12,10 @@ module Admin
 
     private
 
+    def scoped_resource
+      resource_class.eager_load(:rsvp_code)
+    end
+
     class Order < Administrate::Order
       def apply(relation)
         if attribute == 'responded?'
@@ -22,18 +26,12 @@ module Admin
       end
     end
 
-    class ResourceResolver < Administrate::ResourceResolver
-      def resource_class
-        Person.eager_load(:rsvp_code)
-      end
-    end
-
-    def resource_resolver
-      @_resource_resolver ||= ResourceResolver.new(controller_path)
-    end
-
     def order
-      @_order ||= Order.new(params[:order], params[:direction])
+      if params[:order] && params[:direction]
+        @_order ||= Administrate::Order.new(params[:order], params[:direction])
+      else
+        @_order ||= Administrate::Order.new(:full_name, :asc)
+      end
     end
   end
 end

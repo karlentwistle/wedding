@@ -2,7 +2,7 @@ require 'spec_helper'
 require_relative '../../app/forms/rsvp_base_form'
 
 RSpec.describe RsvpBaseForm do
-  let(:rsvp_code) { NullRsvpCode.new }
+  let(:rsvp_code) { RsvpCode.new }
   let(:params) { {} }
   subject { described_class.new(rsvp_code: rsvp_code, params: params) }
 
