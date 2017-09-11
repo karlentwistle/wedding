@@ -10,7 +10,10 @@ class FoodDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     title: Field::String,
-    sitting: Field::Select.with_options(collection: Food.sittings.keys),
+    sitting: Field::Select.with_options(
+      collection: Food.sittings.keys,
+      searchable: false,
+    ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     child: Field::Boolean,
