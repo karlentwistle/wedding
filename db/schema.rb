@@ -16,57 +16,46 @@ ActiveRecord::Schema.define(version: 20170326173044) do
   enable_extension "plpgsql"
   enable_extension "citext"
 
-  create_table "food_choices", force: :cascade do |t|
-    t.integer  "person_id",  null: false
-    t.integer  "food_id",    null: false
-    t.integer  "sitting",    null: false
+  create_table "food_choices", id: :serial, force: :cascade do |t|
+    t.integer "person_id", null: false
+    t.integer "food_id", null: false
+    t.integer "sitting", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["food_id"], name: "index_food_choices_on_food_id", using: :btree
-    t.index ["person_id"], name: "index_food_choices_on_person_id", using: :btree
+    t.index ["food_id"], name: "index_food_choices_on_food_id"
+    t.index ["person_id"], name: "index_food_choices_on_person_id"
   end
 
-  create_table "foods", force: :cascade do |t|
-    t.string   "title",                              null: false
-    t.integer  "sitting",                            null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.boolean  "child",              default: false
-    t.integer  "food_choices_count", default: 0
-    t.index ["sitting"], name: "index_foods_on_sitting", using: :btree
+  create_table "foods", id: :serial, force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "sitting", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "child", default: false
+    t.integer "food_choices_count", default: 0
+    t.index ["sitting"], name: "index_foods_on_sitting"
   end
 
-  create_table "people", force: :cascade do |t|
-    t.string   "full_name",                            null: false
-    t.boolean  "attending_ceremony"
-    t.boolean  "attending_reception"
-    t.integer  "rsvp_code_id"
-    t.string   "dietary_requirements"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.boolean  "child",                default: false
-    t.index ["rsvp_code_id"], name: "index_people_on_rsvp_code_id", using: :btree
+  create_table "people", id: :serial, force: :cascade do |t|
+    t.string "full_name", null: false
+    t.boolean "attending_ceremony"
+    t.boolean "attending_reception"
+    t.integer "rsvp_code_id"
+    t.string "dietary_requirements"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "child", default: false
+    t.index ["rsvp_code_id"], name: "index_people_on_rsvp_code_id"
   end
 
-  create_table "rsvp_codes", force: :cascade do |t|
-    t.citext   "secret",                     null: false
-    t.boolean  "ceremony",                   null: false
-    t.boolean  "reception",                  null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "responded",  default: false
-    t.index ["secret"], name: "index_rsvp_codes_on_secret", using: :btree
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "email",                          null: false
-    t.string   "encrypted_password", limit: 128, null: false
-    t.string   "confirmation_token", limit: 128
-    t.string   "remember_token",     limit: 128, null: false
-    t.index ["email"], name: "index_users_on_email", using: :btree
-    t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  create_table "rsvp_codes", id: :serial, force: :cascade do |t|
+    t.citext "secret", null: false
+    t.boolean "ceremony", null: false
+    t.boolean "reception", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "responded", default: false
+    t.index ["secret"], name: "index_rsvp_codes_on_secret"
   end
 
   add_foreign_key "food_choices", "foods", name: "food_choices_food_id_fk"
