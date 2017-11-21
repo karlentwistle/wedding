@@ -1,26 +1,32 @@
-[![Build Status](https://semaphoreci.com/api/v1/karlentwistle/wedding/branches/master/shields_badge.svg)](https://semaphoreci.com/karlentwistle/wedding)
+# Flair
 
-# README
+[![Build Status](https://travis-ci.org/karlentwistle/wedding.svg?branch=master)](https://travis-ci.org/karlentwistle/wedding)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Wedding
 
-Things you may want to cover:
+Wedding is a Ruby on Rails application that I used for my own wedding.
 
-* Ruby version
+## Features
+- Guest management
+- Wedding event page with information
+- RSVP's are taken on the website
+- Aggregated RSVP notifications 
 
-* System dependencies
+## Roadmap
+- Photo gallery
 
-* Configuration
+## Installing
 
-* Database creation
+```
+$ git clone git@github.com:karlentwistle/wedding.git
+$ cd wedding
+$ bundle install
+$ rake db:create
+$ rake db:migrate
+```
 
-* Database initialization
+## Contributing
 
-* How to run the test suite
+Contributions are welcome, please follow
+[GitHub Flow](https://guides.github.com/introduction/flow/index.html)
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
