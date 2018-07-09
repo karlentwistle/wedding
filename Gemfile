@@ -13,7 +13,7 @@ gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.1'
 gem 'refills'
 gem 'sass-rails', '~> 5.0'
-gem 'simple_form', '~> 3.5'
+gem 'simple_form', '~> 4.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'wicked', '~> 1.3'
 
