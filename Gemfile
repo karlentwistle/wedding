@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.4.1'
 
 gem 'administrate', git: 'https://github.com/thoughtbot/administrate'
-gem 'bourbon', '~> 4.2'
+gem 'bourbon', '~> 5.1'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'neat'
