@@ -24,7 +24,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', '~> 2.12'
+  gem 'capybara', '~> 3.6'
   gem 'factory_girl_rails', '~> 4.8'
   gem 'faker', '~> 1.7', '>= 1.7.2'
 end
